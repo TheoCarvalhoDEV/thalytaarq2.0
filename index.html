@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e9">
   <title>Thalyta Maia · Arquitetura e Interiores</title>
   <script>document.documentElement.className += ' js';</script>
   <meta name="description"
@@ -43,8 +44,8 @@
     rel="stylesheet">
 
   <!-- cache-busting: ao mudar CSS/JS, incremente o número de ?v= para forçar o navegador a baixar a versão nova -->
-  <link rel="stylesheet" href="css/styles.css?v=2">
-  <link rel="stylesheet" href="css/animations.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=7">
+  <link rel="stylesheet" href="css/animations.css?v=7">
 </head>
 
 <body>
@@ -181,10 +182,10 @@
     </a>
 
     <div class="nav__links" id="deskLinks">
-      <a href="#essencia" class="nav__link" data-navlink>Essência</a>
-      <a href="#servicos" class="nav__link" data-navlink>Serviços</a>
-      <a href="#projetos" class="nav__link" data-navlink>Projetos</a>
-      <a href="#bastidores" class="nav__link" data-navlink>Bastidores</a>
+      <a href="#arq-residencial" class="nav__link" data-navlink>Arque + Residencial</a>
+      <a href="#arq-comercial" class="nav__link" data-navlink>Arque + Comercial</a>
+      <a href="#int-residencial" class="nav__link" data-navlink>Inter + Residencial</a>
+      <a href="#int-comercial" class="nav__link" data-navlink>Inter + Comercial</a>
       <a href="#contato" class="nav__link nav__link--btn" data-navlink>Contato</a>
     </div>
 
@@ -205,10 +206,10 @@
       </svg>
     </button>
     <nav class="drawer__links">
-      <a href="#essencia" data-drawerlink>Essência</a>
-      <a href="#servicos" data-drawerlink>Serviços</a>
-      <a href="#projetos" data-drawerlink>Projetos</a>
-      <a href="#bastidores" data-drawerlink>Bastidores</a>
+      <a href="#arq-residencial" data-drawerlink>Arque + Residencial</a>
+      <a href="#arq-comercial" data-drawerlink>Arque + Comercial</a>
+      <a href="#int-residencial" data-drawerlink>Inter + Residencial</a>
+      <a href="#int-comercial" data-drawerlink>Inter + Comercial</a>
       <a href="#contato" data-drawerlink>Contato</a>
     </nav>
     <div class="drawer__contact">(65) 99646-6782<br>arquitetathalytamaia@gmail.com</div>
@@ -254,8 +255,7 @@
     <div class="hero__overlay"></div>
 
     <div class="hero__content" id="heroContent">
-      <img src="assets/images/logo-thalyta-selo-claro.png" alt="" aria-hidden="true" class="hero__emblem" width="409"
-        height="569" data-hero>
+      <!-- selo removido na reunião: capa mais limpa, a logo continua na nav -->
       <h1 class="hero__title" data-hero data-letters>THALYTA MAIA</h1>
       <div class="hero__subtitle" data-hero>
         <span class="hero__rule"></span>
@@ -281,19 +281,6 @@
 
   <!-- ================= ESSÊNCIA ================= -->
   <section id="essencia" class="essencia">
-    <div class="essencia__pattern" aria-hidden="true">
-      <svg width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <pattern id="tmArchEss" x="0" y="0" width="150" height="176" patternUnits="userSpaceOnUse"
-            patternTransform="rotate(-15)">
-            <path d="M28 160 L28 78 A44 44 0 0 1 116 78 L116 160" fill="none" stroke="#efe6da" stroke-width="2.6" />
-            <path d="M72 66 L72 160" fill="none" stroke="#efe6da" stroke-width="2.6" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#tmArchEss)" />
-      </svg>
-    </div>
-
     <div class="essencia__inner">
       <div class="essencia__text">
         <div class="kicker kicker--tan" data-reveal="up">A arquiteta</div>
@@ -325,55 +312,88 @@
 
   <!-- ================= SERVIÇOS ================= -->
   <section id="servicos" class="servicos">
-    <div class="servicos__strip" aria-hidden="true" data-parallax="0.05">
-      <svg width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <pattern id="tmArchStrip" x="0" y="0" width="120" height="150" patternUnits="userSpaceOnUse"
-            patternTransform="rotate(-12)">
-            <path d="M22 132 L22 66 A36 36 0 0 1 94 66 L94 132" fill="none" stroke="#cbb99f" stroke-width="2.2" />
-            <path d="M58 56 L58 132" fill="none" stroke="#cbb99f" stroke-width="2.2" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#tmArchStrip)" />
-      </svg>
-    </div>
     <div class="servicos__inner">
-      <div class="badge" data-reveal="up">SERVIÇOS</div>
+      <!-- o rótulo "Processos" cai em cima da coluna de fotos porque o topo usa a
+           mesma grade de 2 colunas do .service -->
+      <div class="servicos__topo">
+        <div class="badge" data-reveal="up">SERVIÇOS</div>
+        <div data-reveal="up" data-reveal-delay="120">
+          <h3 class="processos__title">Processos</h3>
+          <p class="processos__sub">Bastidores de obra — do papel ao canteiro.</p>
+        </div>
+      </div>
+
+      <!-- ⚠️ PLACEHOLDER — as 12 fotos das faixas .service__processos são de ambiente
+           PRONTO (banco atual do site). SUBSTITUIR pelas fotos de OBRA EM ANDAMENTO que a
+           Thalyta vai enviar e apagar o data-placeholder de cada faixa (some a tracejada). -->
       <div class="servicos__grid" data-stagger>
-        <article class="service" data-reveal="scale">
-          <div class="service__num">01</div>
-          <div class="service__body">
-            <h3 class="service__name">Projeto Arquitetônico</h3>
-            <div class="service__scope">Residencial | Comercial</div>
-            <p class="service__desc">O projeto de arquitetura vai além da construção de espaços; ele traduz ideias em
-              realidade, criando ambientes que atendem às necessidades e sonhos de cada cliente.</p>
+        <article class="service" data-reveal="up">
+          <div class="service__text">
+            <div class="service__num">01</div>
+            <div class="service__body">
+              <h3 class="service__name">Projeto Arquitetônico</h3>
+              <div class="service__scope">Residencial | Comercial</div>
+              <p class="service__desc">O projeto de arquitetura vai além da construção de espaços; ele traduz ideias em
+                realidade, criando ambientes que atendem às necessidades e sonhos de cada cliente.</p>
+            </div>
+          </div>
+          <div class="service__processos" data-placeholder>
+            <figure><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/escritorio-orion.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/sala-jantar.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
-        <article class="service" data-reveal="scale">
-          <div class="service__num">02</div>
-          <div class="service__body">
-            <h3 class="service__name">Projeto de Interiores</h3>
-            <div class="service__scope">Residencial | Comercial</div>
-            <p class="service__desc">Cada detalhe é pensado para unir funcionalidade e estilo, transformando o ambiente
-              em um lugar acolhedor e único.</p>
+
+        <article class="service" data-reveal="up">
+          <div class="service__text">
+            <div class="service__num">02</div>
+            <div class="service__body">
+              <h3 class="service__name">Projeto de Interiores</h3>
+              <div class="service__scope">Residencial | Comercial</div>
+              <p class="service__desc">Cada detalhe é pensado para unir funcionalidade e estilo, transformando o
+                ambiente em um lugar acolhedor e único.</p>
+            </div>
+          </div>
+          <div class="service__processos" data-placeholder>
+            <figure><img src="assets/pinterest/cozinha-marmore.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/cozinha-office.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/lounge-verde.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
-        <article class="service" data-reveal="scale">
-          <div class="service__num">03</div>
-          <div class="service__body">
-            <h3 class="service__name">Projeto de Reforma</h3>
-            <div class="service__scope">Residencial | Comercial</div>
-            <p class="service__desc">Transformamos o ambiente otimizando espaços e melhorando funcionalidade e estética,
-              com soluções criativas alinhadas às necessidades do cliente.</p>
+
+        <article class="service" data-reveal="up">
+          <div class="service__text">
+            <div class="service__num">03</div>
+            <div class="service__body">
+              <h3 class="service__name">Projeto de Reforma</h3>
+              <div class="service__scope">Residencial | Comercial</div>
+              <p class="service__desc">Transformamos o ambiente otimizando espaços e melhorando funcionalidade e
+                estética, com soluções criativas alinhadas às necessidades do cliente.</p>
+            </div>
+          </div>
+          <div class="service__processos" data-placeholder>
+            <figure><img src="assets/pinterest/banheiro-terrazzo.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/lavabo-toucador.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/quarto-casal.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
-        <article class="service" data-reveal="scale">
-          <div class="service__num">04</div>
-          <div class="service__body">
-            <h3 class="service__name">Ambientação</h3>
-            <div class="service__scope">Residencial | Comercial</div>
-            <p class="service__desc">A ambientação é o processo de transformar um espaço, tornando-o acolhedor e cheio
-              de personalidade.</p>
+
+        <article class="service" data-reveal="up">
+          <div class="service__text">
+            <div class="service__num">04</div>
+            <div class="service__body">
+              <h3 class="service__name">Ambientação</h3>
+              <div class="service__scope">Residencial | Comercial</div>
+              <p class="service__desc">A ambientação é o processo de transformar um espaço, tornando-o acolhedor e cheio
+                de personalidade.</p>
+            </div>
+          </div>
+          <div class="service__processos" data-placeholder>
+            <figure><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Processo de obra" loading="lazy">
+            </figure>
+            <figure><img src="assets/pinterest/bercario.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="Processo de obra" loading="lazy">
+            </figure>
           </div>
         </article>
       </div>
@@ -390,315 +410,521 @@
         <div class="rule-center"></div>
       </header>
 
-      <div class="projetos__list">
-        <!-- ===== Grupo: Residenciais ===== -->
-        <h3 class="projetos__group-title" data-reveal="up"><span>Residenciais</span></h3>
+      <p class="projetos__aviso">Prévia — as capas, as fotos internas e as descrições ainda são provisórias,
+        aguardando o material da Thalyta.</p>
 
-        <!-- 1. Quarto Infantil -->
-        <article class="project">
-          <div class="project__media" data-reveal="left">
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/quarto-infantil-floral-800.webp 800w, assets/images/webp/quarto-infantil-floral-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Quarto infantil — ambiente" loading="lazy">
-              </picture>
-            </figure>
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/bercario-800.webp 800w, assets/images/webp/bercario-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/bercario.jpg" alt="Berçário — detalhe" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="right">
-            <div class="kicker kicker--terra">Residencial · Interiores</div>
-            <h3 class="project__name">Quarto Infantil</h3>
-            <div class="rule-left"></div>
-            <p>Um quarto lúdico e delicado, com papel de parede floral, marcenaria planejada e cantos de aconchego. Cada
-              detalhe foi pensado para crescer junto com a criança, unindo funcionalidade e ternura.</p>
-          </div>
-        </article>
-
-        <!-- 2. Cozinha Gourmet -->
-        <article class="project project--reverse">
-          <div class="project__media" data-reveal="right">
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/cozinha-marmore-800.webp 800w, assets/images/webp/cozinha-marmore-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/cozinha-marmore.jpg" alt="Cozinha gourmet — vista geral" loading="lazy">
-              </picture>
-            </figure>
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/cozinha-office-800.webp 800w, assets/images/webp/cozinha-office-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/cozinha-office.jpg" alt="Cozinha gourmet — copa" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="left">
-            <div class="kicker kicker--terra">Residencial · Interiores</div>
-            <h3 class="project__name">Cozinha Gourmet</h3>
-            <div class="rule-left"></div>
-            <p>Cozinha integrada de linhas elegantes, com ilha em mármore, marcenaria clara e detalhes em dourado. A
-              iluminação foi pensada para valorizar texturas e criar uma atmosfera acolhedora para cozinhar e receber.
-            </p>
-          </div>
-        </article>
-
-        <!-- 3. Quarto de Casal (imagem única) -->
-        <article class="project">
-          <div class="project__media project__media--single" data-reveal="left">
-            <figure class="frame frame--tall">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/quarto-casal-800.webp 800w, assets/images/webp/quarto-casal-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/quarto-casal.jpg" alt="Quarto de casal" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="right">
-            <div class="kicker kicker--terra">Residencial · Interiores</div>
-            <h3 class="project__name">Quarto de Casal</h3>
-            <div class="rule-left"></div>
-            <p>Suíte serena com cabeceira estofada, marcenaria amadeirada e iluminação suave. Conforto e elegância
-              atemporal para o descanso.</p>
-          </div>
-        </article>
-
-        <!-- 4. Lavabo & Toucador (imagem única) -->
-        <article class="project project--reverse">
-          <div class="project__media project__media--single" data-reveal="right">
-            <figure class="frame frame--tall">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/lavabo-toucador-800.webp 800w, assets/images/webp/lavabo-toucador-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/lavabo-toucador.jpg" alt="Lavabo e toucador" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="left">
-            <div class="kicker kicker--terra">Residencial · Interiores</div>
-            <h3 class="project__name">Lavabo &amp; Toucador</h3>
-            <div class="rule-left"></div>
-            <p>Lavabo sofisticado com toucador em palhinha, espelho iluminado e paleta neutra. Um espaço pequeno tratado
-              como joia, onde textura e luz fazem toda a diferença.</p>
-          </div>
-        </article>
-
-        <!-- 5. Banheiro Terrazzo (imagem única) -->
-        <article class="project">
-          <div class="project__media project__media--single" data-reveal="left">
-            <figure class="frame frame--tall">
-              <picture>
-                <source type="image/webp" srcset="assets/images/webp/banheiro-terrazzo-800.webp 800w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/banheiro-terrazzo.jpg" alt="Banheiro terrazzo" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="right">
-            <div class="kicker kicker--terra">Residencial · Reforma + Interiores</div>
-            <h3 class="project__name">Banheiro Terrazzo</h3>
-            <div class="rule-left"></div>
-            <p>Banheiro contemporâneo em terrazzo, com marcenaria sob medida e ducha ampla. Materiais nobres e uma
-              composição limpa e funcional.</p>
-          </div>
-        </article>
-
-        <!-- ===== Grupo: Comerciais ===== -->
-        <h3 class="projetos__group-title" data-reveal="up"><span>Comerciais</span></h3>
-
-        <!-- 6. Loja Marias Kids -->
-        <article class="project">
-          <div class="project__media" data-reveal="left">
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/marias-kids-fachada-800.webp 800w, assets/images/webp/marias-kids-fachada-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Loja Marias Kids — fachada" loading="lazy">
-              </picture>
-            </figure>
-            <figure class="frame">
-              <picture>
-                <source type="image/webp" srcset="assets/images/webp/marias-kids-logo-707.webp 707w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/marias-kids-logo.jpg" alt="Loja Marias Kids — interior" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="right">
-            <div class="kicker kicker--terra">Comercial · Reforma</div>
-            <h3 class="project__name">Loja Marias Kids</h3>
-            <div class="rule-left"></div>
-            <p>Projeto de varejo infantil completo: da fachada à ambientação interna. Identidade lúdica, vitrine
-              convidativa e um percurso de compra pensado para encantar famílias.</p>
-          </div>
-        </article>
-
-        <!-- 7. Lounge / Recepção (imagem única) -->
-        <article class="project project--reverse">
-          <div class="project__media project__media--single" data-reveal="right">
-            <figure class="frame">
-              <picture>
-                <source type="image/webp"
-                  srcset="assets/images/webp/lounge-verde-800.webp 800w, assets/images/webp/lounge-verde-1200.webp 1200w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/lounge-verde.jpg" alt="Lounge e recepção" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="left">
-            <div class="kicker kicker--terra">Comercial · Interiores</div>
-            <h3 class="project__name">Lounge &amp; Recepção</h3>
-            <div class="rule-left"></div>
-            <p>Área de espera comercial que acolhe: poltronas verdes, painéis ripados e iluminação difusa. Um ambiente
-              que combina produtividade e bem-estar — veja em movimento logo abaixo.</p>
-          </div>
-        </article>
-
-        <!-- 8. Escritório Orion (imagem única) -->
-        <article class="project">
-          <div class="project__media project__media--single" data-reveal="left">
-            <figure class="frame">
-              <picture>
-                <source type="image/webp" srcset="assets/images/webp/escritorio-orion-720.webp 720w"
-                  sizes="(max-width: 860px) 92vw, 44vw">
-                <img src="assets/pinterest/escritorio-orion.jpg" alt="Escritório Orion" loading="lazy">
-              </picture>
-            </figure>
-          </div>
-          <div class="project__text" data-reveal="right">
-            <div class="kicker kicker--terra">Comercial · Interiores</div>
-            <h3 class="project__name">Escritório Orion</h3>
-            <div class="rule-left"></div>
-            <p>Escritório corporativo com divisórias de vidro e marcenaria ripada, equilibrando transparência, acústica
-              e sofisticação para o dia a dia de trabalho.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ATMOSFERA (vídeo ambiente em arco) ================= -->
-  <section id="atmosfera" class="atmosfera">
-    <div class="atmosfera__inner" data-reveal="up">
-      <div class="atmosfera__head">
-        <div class="kicker kicker--tan">Atmosfera</div>
-        <h2 class="section-title">Entre no ambiente</h2>
-      </div>
-      <figure class="arch-video" data-reveal="mask">
-        <video class="arch-video__el" id="ambientVideo" muted loop playsinline preload="none"
-          poster="assets/videos/reel-04.jpg">
-          <source src="assets/videos/reel-04.mp4" type="video/mp4">
-        </video>
-        <button class="arch-video__sound" id="ambientSound" aria-label="Ativar som" hidden>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-          </svg>
-        </button>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ================= BASTIDORES (reels) ================= -->
-  <section id="bastidores" class="bastidores">
-    <div class="bastidores__inner">
-      <header class="bastidores__head" data-reveal="up">
-        <div class="kicker kicker--tan">@thalytamaiaarquitetura
+      <!-- ============================================================
+           COMO TROCAR UM PLACEHOLDER POR UM PROJETO REAL:
+           1. troque o <img> da .project__capa e os <img> das .frame (fotos internas);
+           2. escreva a descrição no lugar do <p class="projetos__empty">;
+           3. apague o data-placeholder do <details>.
+           Quando o ÚLTIMO data-placeholder sair, o aviso acima some sozinho (CSS :has).
+           Os NOMES abaixo vieram da mensagem da Thalyta no grupo (não do resumo em .docx,
+           que trocava Iraci por "Josiane" e esquecia a Luxshoes).
+           ============================================================ -->
+      <div class="projetos__grupo">
+        <!-- ===== Arque + Residencial ===== -->
+        <h3 id="arq-residencial" class="projetos__group-title" data-reveal="up"><span>Arque + Residencial</span></h3>
+        <div class="projetos__grid">
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/sala-jantar.jpg" alt="Iraci" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Iraci</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Arquitetônico · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/sala-jantar.jpg" alt="Iraci — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/cozinha-marmore.jpg" alt="Iraci — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Ladyslau</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Arquitetônico · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Ladyslau — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/lounge-verde.jpg" alt="Adelaide" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Adelaide</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Arquitetônico · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Adelaide — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-casal.jpg" alt="Adelaide — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
         </div>
-        <h2 class="section-title">Bastidores</h2>
-        <p class="bastidores__sub">Obras, processo e o dia a dia do escritório. Toque para assistir.</p>
-      </header>
-
-      <div class="reels" data-stagger>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-01.jpg">
-            <source src="assets/videos/reel-01.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-03.jpg">
-            <source src="assets/videos/reel-03.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-05.jpg">
-            <source src="assets/videos/reel-05.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-07.jpg">
-            <source src="assets/videos/reel-07.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-02.jpg">
-            <source src="assets/videos/reel-02.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
-        <figure class="reel" data-reveal="up">
-          <video class="reel__el" preload="none" playsinline poster="assets/videos/reel-06.jpg">
-            <source src="assets/videos/reel-06.mp4" type="video/mp4">
-          </video>
-          <button class="reel__play" aria-label="Reproduzir vídeo"></button>
-        </figure>
       </div>
 
-      <div class="bastidores__cta" data-reveal="up">
-        <a class="btn btn--outline btn--light" href="https://www.instagram.com/thalytamaiaarquitetura/" target="_blank"
-          rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-            aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
-          </svg>
-          <span>Seguir no Instagram</span>
-        </a>
+      <div class="projetos__grupo">
+        <!-- ===== Arque + Comercial ===== -->
+        <h3 id="arq-comercial" class="projetos__group-title" data-reveal="up"><span>Arque + Comercial</span></h3>
+        <div class="projetos__grid">
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Economize Farmácia</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Arquitetônico · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia — fachada" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="Economize Farmácia — interior" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="projetos__grupo">
+        <!-- ===== Inter + Residencial ===== -->
+        <h3 id="int-residencial" class="projetos__group-title" data-reveal="up"><span>Inter + Residencial</span></h3>
+        <div class="projetos__grid">
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/cozinha-office.jpg" alt="Filipe F R" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Filipe F R</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/cozinha-office.jpg" alt="Filipe F R — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/sala-jantar.jpg" alt="Filipe F R — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/quarto-casal.jpg" alt="Uyara" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Uyara</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/quarto-casal.jpg" alt="Uyara — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/lavabo-toucador.jpg" alt="Uyara — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/sala-jantar.jpg" alt="Orivaldo" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Orivaldo</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/sala-jantar.jpg" alt="Orivaldo — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/banheiro-terrazzo.jpg" alt="Orivaldo — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Rogério e Ana</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Residencial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/cozinha-marmore.jpg" alt="Rogério e Ana — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="projetos__grupo">
+        <!-- ===== Infantil (sub-aba nova, pedida na reunião) ===== -->
+        <h3 id="infantil" class="projetos__group-title" data-reveal="up"><span>Infantil</span></h3>
+        <div class="projetos__grid">
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Maria Clara | Kamila</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Infantil</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/bercario.jpg" alt="Maria Clara | Kamila — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/bercario.jpg" alt="Maria Antônia" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Maria Antônia</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Infantil</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/bercario.jpg" alt="Maria Antônia — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="Maria Antônia — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">José Antônio</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Infantil</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="José Antônio — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Pedro Miguel</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Infantil</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-casal.jpg" alt="Pedro Miguel — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/bercario.jpg" alt="Enzo" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Enzo</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Infantil</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/bercario.jpg" alt="Enzo — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="Enzo — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="projetos__grupo">
+        <!-- ===== Inter + Comercial ===== -->
+        <h3 id="int-comercial" class="projetos__group-title" data-reveal="up"><span>Inter + Comercial</span></h3>
+        <div class="projetos__grid">
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/escritorio-orion.jpg" alt="Luxshoes" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Luxshoes</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="Luxshoes — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Luxshoes — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/lounge-verde.jpg" alt="Machado Store" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Machado Store</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Machado Store — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Machado Store — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Innamorato</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="Innamorato — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Filipe Maia Broeto Adv</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/lounge-verde.jpg" alt="Valber Adv" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Valber Adv</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="Valber Adv — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="Valber Adv — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">Marias Kids</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids — fachada" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Marias Kids — interior" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+          <details class="project" data-reveal="up" data-placeholder>
+            <summary class="project__cover">
+              <figure class="project__capa">
+                <img src="assets/pinterest/escritorio-orion.jpg" alt="NC Store" loading="lazy">
+              </figure>
+              <div class="project__label">
+                <h4 class="project__name">NC Store</h4>
+                <span class="project__toggle" aria-hidden="true"></span>
+              </div>
+            </summary>
+            <div class="project__panel">
+              <div class="project__text">
+                <div class="kicker kicker--terra">Interiores · Comercial</div>
+                <div class="rule-left"></div>
+                <p class="projetos__empty">Descrição e fotos reais — aguardando envio.</p>
+              </div>
+              <div class="project__media">
+                <figure class="frame"><img src="assets/pinterest/escritorio-orion.jpg" alt="NC Store — ambiente" loading="lazy"></figure>
+                <figure class="frame"><img src="assets/pinterest/lounge-verde.jpg" alt="NC Store — ambiente" loading="lazy"></figure>
+              </div>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ================= CONTATO ================= -->
   <section id="contato" class="contato">
-    <div class="contato__text">
-      <h2 class="section-title" data-reveal="up">ENTRE EM CONTATO!</h2>
-      <p class="contato__lead" data-reveal="up" data-reveal-delay="80">Será um prazer realizar esse projeto e fazer
-        parte da realização desse sonho.</p>
+    <!-- três blocos distribuídos na largura: chamada · dados · ações -->
+    <div class="contato__inner">
+      <div class="contato__text">
+        <h2 class="section-title section-title--dark" data-reveal="up">ENTRE EM CONTATO!</h2>
+        <p class="contato__lead" data-reveal="up" data-reveal-delay="80">Será um prazer realizar esse projeto e fazer
+          parte da realização desse sonho.</p>
+      </div>
 
       <div class="contato__details" data-reveal="up" data-reveal-delay="140">
         <div class="contato__row"><span class="contato__label">CAU</span>A305121-8</div>
         <a class="contato__row" href="mailto:arquitetathalytamaia@gmail.com"><span
             class="contato__label">EMAIL</span>arquitetathalytamaia@gmail.com</a>
-        <a class="contato__row" href="https://wa.me/5565996466782" target="_blank" rel="noopener"><span
-            class="contato__label">CONTATO</span>(65) 99646-6782</a>
+        <a class="contato__row"
+          href="https://wa.me/5565996466782?text=Ol%C3%A1%2C%20Thalyta!%20Vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+          target="_blank" rel="noopener"><span class="contato__label">CONTATO</span>(65) 99646-6782</a>
       </div>
 
       <div class="contato__actions" data-reveal="up" data-reveal-delay="200">
-        <a class="btn btn--solid" href="https://wa.me/5565996466782" target="_blank" rel="noopener">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 20.5l1.5-5.3A8.5 8.5 0 1 1 21 11.5Z" />
+        <a class="btn btn--solid"
+          href="https://wa.me/5565996466782?text=Ol%C3%A1%2C%20Thalyta!%20Vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+          target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
-              d="M8.5 9.2c0-.5.4-.9.9-.8.3 0 .5.2.6.5l.5 1.2c.1.3 0 .5-.2.7l-.3.3c.5 1 1.3 1.7 2.3 2.2l.3-.4c.2-.2.5-.3.7-.2l1.2.5c.3.1.4.4.4.7 0 .8-.7 1.4-1.5 1.3a6.7 6.7 0 0 1-5.4-5.5Z" />
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413" />
           </svg>
           <span>WhatsApp</span>
         </a>
@@ -713,25 +939,33 @@
         </a>
       </div>
     </div>
-    <div class="contato__media" style="background-image:url('assets/images/webp/pattern-799.webp')" data-parallax="0.08"
-      aria-hidden="true"></div>
   </section>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <img src="assets/images/logo-thalyta-selo-claro.png" alt="" aria-hidden="true" class="footer__emblem" width="409"
-      height="569">
-    <span>© <span id="year">2026</span> THALYTA MAIA · ARQUITETURA E INTERIORES · CAU A305121-8</span>
+    <img src="assets/images/logo-thalyta-escuro.png" alt="" aria-hidden="true" class="footer__emblem" width="778"
+      height="260">
+    <!-- REUNIÃO: finalização = barra de navegação + chamada de contato -->
+    <nav class="footer__nav" aria-label="Navegação do rodapé">
+      <a href="#arq-residencial">Arque + Residencial</a>
+      <a href="#arq-comercial">Arque + Comercial</a>
+      <a href="#int-residencial">Inter + Residencial</a>
+      <a href="#infantil">Infantil</a>
+      <a href="#int-comercial">Inter + Comercial</a>
+      <a href="#contato">Entre em contato</a>
+    </nav>
+    <span>© <span id="year">2026</span> · CAU A305121-8</span>
   </footer>
 
-  <!-- floating whatsapp -->
-  <a class="wa-float" href="https://wa.me/5565996466782" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f6f1e9" stroke-width="1.6"
-      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 20.5l1.5-5.3A8.5 8.5 0 1 1 21 11.5Z" />
+  <!-- WhatsApp flutuante — glifo oficial; no desktop expande em pílula com rótulo -->
+  <a class="wa-float"
+    href="https://wa.me/5565996466782?text=Ol%C3%A1%2C%20Thalyta!%20Vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+    target="_blank" rel="noopener" aria-label="Fale com a Thalyta pelo WhatsApp">
+    <svg class="wa-float__icon" width="27" height="27" viewBox="0 0 24 24" fill="#f6f1e9" aria-hidden="true">
       <path
-        d="M8.5 9.2c0-.5.4-.9.9-.8.3 0 .5.2.6.5l.5 1.2c.1.3 0 .5-.2.7l-.3.3c.5 1 1.3 1.7 2.3 2.2l.3-.4c.2-.2.5-.3.7-.2l1.2.5c.3.1.4.4.4.7 0 .8-.7 1.4-1.5 1.3a6.7 6.7 0 0 1-5.4-5.5Z" />
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413" />
     </svg>
+    <span class="wa-float__label">Fale com a Thalyta</span>
   </a>
 
   <!-- back to top -->
@@ -772,7 +1006,7 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 
 </html>

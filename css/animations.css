@@ -100,6 +100,31 @@ body.loaded .page-curtain { transform: translateY(-100%); }
 .drawer.is-open .drawer__links a:nth-child(5) { transition-delay: .34s; }
 
 /* =========================================================
+   WhatsApp flutuante — anel de aceno periódico
+   Base opacity: 0 — o anel só existe enquanto a animação roda;
+   no hover a animação para e ele some sem "congelar" visível.
+   ========================================================= */
+@keyframes wa-ping {
+  0% { transform: scale(1); opacity: .5; }
+  55%, 100% { transform: scale(1.55); opacity: 0; }
+}
+
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(74, 46, 33, .65);
+  opacity: 0;
+  animation: wa-ping 4s var(--ease) infinite;
+  pointer-events: none;
+}
+
+.wa-float:hover::before {
+  animation: none;
+}
+
+/* =========================================================
    Acessibilidade — respeitar prefers-reduced-motion
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
@@ -109,6 +134,8 @@ body.loaded .page-curtain { transform: translateY(-100%); }
     transition-duration: .001ms !important;
     scroll-behavior: auto !important;
   }
+  /* o seletor * acima não alcança pseudo-elementos — o anel precisa ser desligado à mão */
+  .wa-float::before { animation: none !important; }
   [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   .drawer .drawer__links a { opacity: 1 !important; transform: none !important; }
   .hero__content [data-hero],

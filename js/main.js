@@ -318,61 +318,55 @@
     }, { passive: true });
   }
 
-  /* ---------- VÍDEOS (ambiente + reels) ---------- */
-  function initVideos() {
-    // vídeo ambiente: autoplay mudo ao entrar na tela; botão de som
-    var amb = $('#ambientVideo');
-    if (amb) {
-      if (!reduceMotion && 'IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (es) {
-          es.forEach(function (e) {
-            if (e.isIntersecting) { amb.play().catch(function () {}); }
-            else { amb.pause(); }
-          });
-        }, { threshold: 0.35 });
-        io.observe(amb);
-      }
-      var sound = $('#ambientSound');
-      if (sound) {
-        sound.hidden = false;
-        sound.addEventListener('click', function () {
-          amb.muted = !amb.muted;
-          sound.classList.toggle('is-on', !amb.muted);
-          sound.setAttribute('aria-label', amb.muted ? 'Ativar som' : 'Desativar som');
-          if (!amb.muted) amb.play().catch(function () {});
-        });
-      }
-    }
+  /* ---------- categorias do portfólio: 3 capas + "Ver todos" ----------
+     Cada categoria mostra só a primeira linha do grid; o botão revela o resto.
+     Roda ANTES do initReveal: os cards escondidos já nascem com .is-in e
+     aparecem na hora ao expandir, sem esperar um novo scroll. */
+  function initProjectGroups() {
+    var MAX_VISIVEL = 3;
+    $$('.projetos__grupo').forEach(function (grupo) {
+      var grid = $('.projetos__grid', grupo);
+      if (!grid) return;
+      var total = $$('.project', grid).length;
+      if (total <= MAX_VISIVEL) return;
 
-    // reels: clique para tocar (com som), pausa os demais
-    var reels = $$('.reel');
-    reels.forEach(function (fig) {
-      var v = fig.querySelector('video');
-      var btn = fig.querySelector('.reel__play');
-      if (!v || !btn) return;
+      grupo.classList.add('is-collapsed');
+
+      var wrap = document.createElement('div');
+      wrap.className = 'projetos__more-wrap';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'projetos__more';
+      btn.setAttribute('aria-expanded', 'false');
+      var rotuloVer = 'Ver todos os projetos (' + total + ')';
+      btn.textContent = rotuloVer;
+      wrap.appendChild(btn);
+      grupo.appendChild(wrap);
+
       btn.addEventListener('click', function () {
-        if (v.paused) {
-          reels.forEach(function (o) {
-            if (o !== fig) { var ov = o.querySelector('video'); if (ov) ov.pause(); }
-          });
-          v.play().catch(function () {});
-        } else { v.pause(); }
+        var recolhido = grupo.classList.toggle('is-collapsed');
+        btn.setAttribute('aria-expanded', String(!recolhido));
+        btn.textContent = recolhido ? rotuloVer : 'Mostrar menos';
+        // ao recolher, a página encurta — volta ao título pra não "cair" em outra seção
+        if (recolhido) {
+          var titulo = $('.projetos__group-title', grupo);
+          if (titulo && titulo.getBoundingClientRect().top < 0) {
+            titulo.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+          }
+        }
       });
-      v.addEventListener('play', function () { fig.classList.add('is-playing'); });
-      v.addEventListener('pause', function () { fig.classList.remove('is-playing'); });
-      v.addEventListener('ended', function () { fig.classList.remove('is-playing'); v.currentTime = 0; });
     });
   }
 
   /* ---------- init ---------- */
   function init() {
     initIntro();
+    initProjectGroups();
     initReveal();
     initHero();
     initParallax();
     initHeroMouse();
     initGallery();
-    initVideos();
     onScrollNav();
     onScrollMisc();
   }
