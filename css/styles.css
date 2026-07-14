@@ -155,11 +155,21 @@ a {
   transition: color .45s var(--ease);
 }
 
-/* logo oficial em SVG vetorial — herda a cor de .nav__logo (transição já existente) */
-.nav__logo svg {
-  height: 46px;
+/* logo oficial (arte horizontal, rasterizada do PDF vetorial em 4x, com transparência).
+   58px é a altura mínima pra linha "ARQUITETURA E INTERIORES" — que é só 11% da arte —
+   sair com ~7px e ser legível. Sobre a foto do hero a arte é invertida pra clara;
+   quando a nav fica sólida, volta ao marrom original e pode encolher. */
+.nav__logo img {
+  height: 58px;
   width: auto;
   display: block;
+  filter: brightness(0) invert(1);
+  transition: filter .45s var(--ease), height .45s var(--ease);
+}
+
+.nav--solid .nav__logo img {
+  height: 48px;
+  filter: none;
 }
 
 .nav__links {
@@ -999,31 +1009,90 @@ body.menu-open .burger-line:nth-child(3) {
   padding: clamp(20px, 2.6vw, 34px) 0 clamp(10px, 1.4vw, 18px);
 }
 
+/* ---------- palco + miniaturas ----------
+   Todas as fotos ficam no painel, mas ele tem altura fixa: a miniatura troca o
+   palco, e clicar no palco abre o lightbox na foto que está em destaque. */
 .project__media {
   flex: 1.5 1 440px;
   min-width: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
 }
 
-.frame {
+.project__palco {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/3;
   overflow: hidden;
   background: var(--sand-2);
-  margin: 0;
+  margin: 0 0 12px;
+  cursor: zoom-in;
 }
 
-.frame img {
+.project__palco img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 1.2s cubic-bezier(.2, .7, .2, 1);
 }
 
-.project__media:hover .frame img {
-  transform: scale(1.06);
+.project__palco:hover img {
+  transform: scale(1.04);
+}
+
+.project__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--terra) var(--sand-2);
+}
+
+.project__thumbs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.project__thumbs::-webkit-scrollbar-track {
+  background: var(--sand-2);
+  border-radius: 99px;
+}
+
+.project__thumbs::-webkit-scrollbar-thumb {
+  background: var(--terra);
+  border-radius: 99px;
+}
+
+.project__thumb {
+  flex: 0 0 84px;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: .55;
+  transition: opacity .35s ease;
+}
+
+.project__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project__thumb:hover,
+.project__thumb:focus-visible,
+.project__thumb.is-ativa {
+  opacity: 1;
+  outline: 2px solid var(--terra);
+  outline-offset: -2px;
+}
+
+.project__conta {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin: 8px 0 0;
 }
 
 .project__text {
@@ -1031,22 +1100,22 @@ body.menu-open .burger-line:nth-child(3) {
   max-width: 440px;
 }
 
-.project__text p {
-  font-family: var(--ff-sans);
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.85;
-  color: var(--muted);
-  margin: 0;
-  text-wrap: pretty;
+/* o kicker padrão (12px) sumia ao lado da descrição do projeto */
+.project__text .kicker {
+  font-size: 14px;
+  letter-spacing: .26em;
 }
 
-/* TEMPORÁRIO: grita que a foto de PROCESSOS não é a real. Some sozinho quando o
-   data-placeholder for removido. No portfólio a tracejada saiu (poluía as capas) —
-   lá quem avisa é o .projetos__aviso, no topo da seção. */
-.service__processos[data-placeholder] figure {
-  outline: 2px dashed var(--terra);
-  outline-offset: -2px;
+.project__text p {
+  font-family: var(--ff-sans);
+  font-weight: 400;
+  font-size: 16.5px;
+  line-height: 1.7;
+  letter-spacing: normal;
+  color: var(--ink);
+  max-width: 58ch;
+  margin: 0;
+  text-wrap: pretty;
 }
 
 /* =========================================================
@@ -1372,8 +1441,8 @@ a.contato__row:hover {
     display: inline-flex;
   }
 
-  .nav__logo svg {
-    height: 40px;
+  .nav__logo img {
+    height: 44px;
   }
 }
 
@@ -1390,8 +1459,8 @@ a.contato__row:hover {
 }
 
 @media (max-width: 400px) {
-  .nav__logo svg {
-    height: 34px;
+  .nav__logo img {
+    height: 40px;
   }
 }
 
@@ -1408,11 +1477,11 @@ a.contato__row:hover {
 /* =========================================================
    Quadros clicáveis (afordância de "ampliar")
    ========================================================= */
-.frame {
+.project__palco {
   cursor: zoom-in;
 }
 
-.frame::before {
+.project__palco::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1422,12 +1491,12 @@ a.contato__row:hover {
   pointer-events: none;
 }
 
-.frame:hover::before,
-.frame:focus-visible::before {
+.project__palco:hover::before,
+.project__palco:focus-visible::before {
   background: rgba(36, 22, 16, .30);
 }
 
-.frame::after {
+.project__palco::after {
   content: "";
   position: absolute;
   z-index: 3;
@@ -1444,8 +1513,8 @@ a.contato__row:hover {
   pointer-events: none;
 }
 
-.frame:hover::after,
-.frame:focus-visible::after {
+.project__palco:hover::after,
+.project__palco:focus-visible::after {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
@@ -1609,19 +1678,10 @@ body.lb-lock {
   object-position: center 22%;
 }
 
-/* projeto de imagem única */
-.project__media--single {
-  grid-template-columns: 1fr;
-}
-
-.frame--tall {
-  aspect-ratio: 4/5;
-}
 
 /* =========================================================
    Nitidez durante animações de escala
    ========================================================= */
-.frame img,
 .hero__slide,
 .portrait__img {
   backface-visibility: hidden;

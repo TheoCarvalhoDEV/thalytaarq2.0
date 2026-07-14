@@ -224,20 +224,24 @@
     var lbImg = $('#lbImg'), lbTitle = $('#lbTitle'), lbCount = $('#lbCount'), stage = $('#lbStage');
     var btnClose = $('#lbClose'), btnPrev = $('#lbPrev'), btnNext = $('#lbNext');
 
-    // monta uma galeria por projeto (imagens de cada .project__media)
+    // monta uma galeria por projeto. Projeto com muitas fotos usa palco + miniaturas
+    // (.project__media--destaque): a galeria vem das miniaturas e quem abre o lightbox
+    // é o palco, na foto em destaque. Os outros seguem com os quadros clicáveis.
     var galleries = $$('.project__media').map(function (media) {
       var project = media.closest('.project');
       var nameEl = project ? project.querySelector('.project__name') : null;
       var title = nameEl ? nameEl.textContent.trim() : '';
-      var items = $$('.frame', media).map(function (frame) {
-        var img = frame.querySelector('img');
+      var palco = media.querySelector('.project__palco');
+      var thumbs = $$('.project__thumb', media);
+      var items = (palco ? thumbs : $$('.frame', media)).map(function (el) {
+        var img = el.querySelector('img');
         return {
-          frame: frame,
+          el: el,
           src: img ? (img.getAttribute('data-full') || img.getAttribute('src')) : '',
           alt: (img && img.getAttribute('alt')) || title
         };
       });
-      return { title: title, items: items };
+      return { title: title, items: items, media: media, palco: palco };
     }).filter(function (g) { return g.items.length; });
 
     if (!galleries.length) return;
@@ -281,10 +285,34 @@
       render(true);
     }
 
-    // torna cada quadro clicável e acessível por teclado
+    // torna clicável: o palco (projetos com miniaturas) ou cada quadro (os demais)
     galleries.forEach(function (g, gi) {
+      if (g.palco) {
+        var conta = g.media.querySelector('.project__conta');
+        var atual = 0;
+        function destacar(i) {
+          atual = i;
+          var it = g.items[i];
+          g.palco.querySelector('img').src = it.src;
+          g.palco.querySelector('img').alt = it.alt;
+          if (conta) conta.textContent = (i + 1) + ' / ' + g.items.length;
+          g.items.forEach(function (o, j) { o.el.classList.toggle('is-ativa', j === i); });
+        }
+        g.items.forEach(function (it, ii) {
+          it.el.addEventListener('click', function () { destacar(ii); });
+        });
+        g.palco.setAttribute('role', 'button');
+        g.palco.setAttribute('tabindex', '0');
+        g.palco.setAttribute('aria-label', 'Ampliar imagem — ' + g.title);
+        g.palco.addEventListener('click', function () { open(gi, atual, g.palco); });
+        g.palco.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(gi, atual, g.palco); }
+        });
+        destacar(0);
+        return;
+      }
       g.items.forEach(function (it, ii) {
-        var f = it.frame;
+        var f = it.el;
         f.setAttribute('role', 'button');
         f.setAttribute('tabindex', '0');
         f.setAttribute('aria-label', 'Ampliar imagem — ' + g.title + ' (' + (ii + 1) + ' de ' + g.items.length + ')');
