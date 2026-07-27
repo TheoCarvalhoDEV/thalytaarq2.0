@@ -10,8 +10,8 @@
   <meta name="description"
     content="Thalyta Maia — Arquitetura e Interiores. Projetos residenciais e comerciais com sensibilidade, criando ambientes que acolhem e inspiram. Atendimento presencial e online para todo o Brasil.">
   <link rel="canonical" href="https://theocarvalhodev.github.io/thalytaarqu/">
-  <link rel="icon" href="favicon.ico" sizes="48x48">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" href="../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
 
   <!-- ===== Open Graph — preview ao compartilhar o link (WhatsApp, Instagram, Facebook, LinkedIn) ===== -->
   <meta property="og:type" content="website">
@@ -44,8 +44,223 @@
     rel="stylesheet">
 
   <!-- cache-busting: ao mudar CSS/JS, incremente o número de ?v= para forçar o navegador a baixar a versão nova -->
-  <link rel="stylesheet" href="css/styles.css?v=7">
-  <link rel="stylesheet" href="css/animations.css?v=7">
+  <link rel="stylesheet" href="../css/styles.css?v=9">
+  <link rel="stylesheet" href="../css/animations.css?v=7">
+
+  <style>
+    /* ---- VARIANTE DE HERO (estilo bernardesarq) — só nesta página ---- */
+    .heroB {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .heroB__viewport {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* a pilha inteira desliza — é isso que o fullPage.js faz com translate3d */
+    .heroB__track {
+      height: 100%;
+      transition: transform 800ms ease;
+      will-change: transform;
+    }
+
+    .heroB__slide {
+      position: relative;
+      height: 100vh;
+      background: var(--ink) center center / cover no-repeat;
+    }
+
+    .heroB__slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(36, 22, 16, .40) 0%, rgba(36, 22, 16, .04) 34%, rgba(36, 22, 16, .55) 100%);
+      pointer-events: none;
+    }
+
+    .heroB__link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .heroB__label {
+      position: absolute;
+      left: clamp(20px, 5vw, 60px);
+      bottom: clamp(38px, 6vw, 70px);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--cream);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .7s var(--ease) .25s, transform .7s var(--ease) .25s;
+    }
+
+    .heroB__slide.is-active .heroB__label {
+      opacity: 1;
+      transform: none;
+    }
+
+    .heroB__cat {
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .82;
+    }
+
+    .heroB__nome {
+      font-family: var(--ff-serif);
+      font-size: clamp(30px, 4.4vw, 58px);
+      line-height: 1.05;
+    }
+
+    .heroB__cta {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 15px 32px;
+      font-family: var(--ff-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--cream);
+      border-radius: 999px;
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 8px 26px rgba(20, 12, 8, .28);
+      transform: translate(-50%, -50%) translateY(12px);
+      transition: opacity .7s var(--ease) .25s, transform .7s var(--ease) .25s, background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
+    }
+
+    .heroB__slide.is-active .heroB__cta {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+      animation: heroB-cta-pulse 2.6s ease-in-out infinite 1s;
+    }
+
+    .heroB__cta svg {
+      transition: transform .35s var(--ease);
+    }
+
+    .heroB__slide.is-active .heroB__cta:hover,
+    .heroB__slide.is-active .heroB__cta:focus-visible {
+      background: transparent;
+      color: var(--cream);
+      box-shadow: 0 14px 34px rgba(20, 12, 8, .38);
+      animation-play-state: paused;
+    }
+
+    .heroB__cta:hover svg,
+    .heroB__cta:focus-visible svg {
+      transform: translateX(4px);
+    }
+
+    @keyframes heroB-cta-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 26px rgba(20, 12, 8, .28), 0 0 0 0 rgba(246, 241, 233, .35);
+      }
+
+      50% {
+        box-shadow: 0 8px 26px rgba(20, 12, 8, .28), 0 0 0 9px rgba(246, 241, 233, 0);
+      }
+    }
+
+    .heroB__cue,
+    .heroB__todos {
+      position: absolute;
+      z-index: 4;
+      color: var(--cream);
+      text-decoration: none;
+      transition: opacity .5s var(--ease), transform .5s var(--ease);
+    }
+
+    .heroB__cue {
+      left: 50%;
+      bottom: 26px;
+      margin-left: -9px;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      animation: heroB-bounce 2.4s infinite;
+    }
+
+    /* na última tela a seta some e o "Todos os projetos" sobe — igual ao original */
+    .heroB.is-last .heroB__cue {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heroB__todos {
+      right: clamp(20px, 5vw, 60px);
+      bottom: clamp(38px, 6vw, 70px);
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(246, 241, 233, .5);
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+    }
+
+    .heroB.is-last .heroB__todos {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .heroB__todos:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    @keyframes heroB-bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(9px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .heroB__track,
+      .heroB__label,
+      .heroB__cta,
+      .heroB__cue,
+      .heroB__todos {
+        transition: none;
+        animation: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -56,7 +271,8 @@
   <!-- ================= NAV ================= -->
   <nav class="nav" id="nav">
     <a href="#hero" class="nav__logo" data-navlink aria-label="Thalyta Maia — Arquitetura e Interiores · Início">
-      <img src="assets/images/logo-horizontal.png" alt="" aria-hidden="true" width="1164" height="232">
+      <img src="../assets/images/logo-horizontal.png" alt="" aria-hidden="true"
+        width="1164" height="232">
     </a>
 
     <div class="nav__links" id="deskLinks">
@@ -65,7 +281,7 @@
       <a href="#int-residencial" class="nav__link" data-navlink>Int + Residencial</a>
       <a href="#int-comercial" class="nav__link" data-navlink>Int + Comercial</a>
       <a href="#contato" class="nav__link nav__link--btn" data-navlink>Contato</a>
-      <a href="hero-bernardes/index.html" class="nav__variant-tag" title="Alternar para a versão Hero Bernardes">Hero Bernardes ↗</a>
+      <a href="../index.html" class="nav__variant-tag" title="Alternar para a versão Padrão">Hero Padrão ↗</a>
     </div>
 
     <button class="nav__burger" id="burger" data-navlink aria-label="Abrir menu" aria-expanded="false"
@@ -85,78 +301,73 @@
       </svg>
     </button>
     <nav class="drawer__links">
-      <a href="#arq-residencial" data-drawerlink>Arq + Residencial</a>
-      <a href="#arq-comercial" data-drawerlink>Arq + Comercial</a>
-      <a href="#int-residencial" data-drawerlink>Int + Residencial</a>
-      <a href="#int-comercial" data-drawerlink>Int + Comercial</a>
+      <a href="#arq-residencial" data-drawerlink>Arque + Residencial</a>
+      <a href="#arq-comercial" data-drawerlink>Arque + Comercial</a>
+      <a href="#int-residencial" data-drawerlink>Inter + Residencial</a>
+      <a href="#int-comercial" data-drawerlink>Inter + Comercial</a>
       <a href="#contato" data-drawerlink>Contato</a>
-      <a href="hero-bernardes/index.html" style="margin-top:14px; font-size:13px; font-weight:600; color:var(--brand);">Ver Versão Hero Bernardes ↗</a>
+      <a href="../index.html" style="margin-top:14px; font-size:13px; font-weight:600; color:var(--brand);">Ver Versão Hero Padrão ↗</a>
     </nav>
     <div class="drawer__contact">(65) 99646-6782<br>arquitetathalytamaia@gmail.com</div>
   </aside>
 
   <!-- ================= HERO ================= -->
-  <section id="hero" class="hero">
-    <div class="hero__slides" id="heroSlides">
-      <div class="hero__slide is-active" data-pan="1">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-cozinha-768.webp 768w, assets/images/webp/hero-cozinha-1280.webp 1280w, assets/images/webp/hero-cozinha-1440.webp 1440w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-cozinha.jpg" alt="" fetchpriority="high"
-            decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="2">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-lounge-768.webp 768w, assets/images/webp/hero-lounge-1280.webp 1280w, assets/images/webp/hero-lounge-1920.webp 1920w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-lounge.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="3">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-lavabo-768.webp 768w, assets/images/webp/hero-lavabo-1280.webp 1280w, assets/images/webp/hero-lavabo-1440.webp 1440w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-lavabo.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="4">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-quarto-768.webp 768w, assets/images/webp/hero-quarto-1280.webp 1280w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-quarto.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
+  <!-- ================= HERO (variante bernardesarq) =================
+       Igual ao fullPage.js do site de referência: a pilha inteira de seções translada
+       100vh por vez, 800ms com easing "ease", e uma rolada da roda = exatamente uma
+       seção. Sem jQuery e sem as 90 KB do plugin — o controlador está no fim do body. -->
+  <section id="hero" class="heroB">
+    <div class="heroB__viewport">
+      <div class="heroB__track" id="heroBTrack">
+        <section class="heroB__slide" style="background-image:url('../assets/projetos/a-r/01.jpg')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver A R"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">A R</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('../assets/images/hero-lounge.jpg')">
+          <a class="heroB__link" href="#arq-residencial" aria-label="Ver Adelaide"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Arquitetônico · Residencial</span>
+            <span class="heroB__nome">Adelaide</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('../assets/projetos/f-r/01.jpg')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver F R"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">F R</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('../assets/projetos/u-j/01.jpg')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver U J"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">U J</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('../assets/images/hero-lavabo.jpg')">
+          <a class="heroB__link" href="#int-comercial" aria-label="Ver Marias Kids"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Comercial</span>
+            <span class="heroB__nome">Marias Kids</span>
+          </div>
+          <a class="heroB__cta" href="#essencia" id="heroBCta">Conheça mais
+            <svg width="14" height="10" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M1 7h17M12 1l6 6-6 6" />
+            </svg>
+          </a>
+        </section>
       </div>
     </div>
-    <div class="hero__overlay"></div>
-
-    <div class="hero__content" id="heroContent">
-      <!-- selo removido na reunião: capa mais limpa, a logo continua na nav -->
-      <h1 class="hero__title" data-hero data-letters>THALYTA MAIA</h1>
-      <div class="hero__subtitle" data-hero>
-        <span class="hero__rule"></span>
-        <span class="hero__sub-text">Arquitetura e Interiores</span>
-        <span class="hero__rule"></span>
-      </div>
-    </div>
-
-    <a href="#essencia" class="hero__cue" aria-label="Rolar para baixo">
-      <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.3"
+    <button type="button" class="heroB__cue" id="heroBCue" aria-label="Próximo projeto">
+      <svg width="18" height="28" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.3"
         aria-hidden="true">
         <path d="M10 1v22M4 17l6 6 6-6" />
       </svg>
-    </a>
-
-    <div class="hero__dots" id="heroDots" role="tablist" aria-label="Slides">
-      <button class="hero__dot is-active" data-slide="0" aria-label="Slide 1"></button>
-      <button class="hero__dot" data-slide="1" aria-label="Slide 2"></button>
-      <button class="hero__dot" data-slide="2" aria-label="Slide 3"></button>
-      <button class="hero__dot" data-slide="3" aria-label="Slide 4"></button>
-    </div>
+    </button>
+    <a href="#projetos" class="heroB__todos">Todos os projetos</a>
   </section>
 
   <!-- ================= ESSÊNCIA ================= -->
@@ -180,8 +391,8 @@
       <div class="essencia__portrait-wrap" data-reveal="up" data-reveal-delay="140">
         <figure class="portrait portrait--arch" data-reveal="mask">
           <picture>
-            <source type="image/webp" srcset="assets/images/webp/portrait-686.webp">
-            <img src="assets/images/portrait.jpg" alt="Thalyta Maia, arquiteta" class="portrait__img"
+            <source type="image/webp" srcset="../assets/images/webp/portrait-686.webp">
+            <img src="../assets/images/portrait.jpg" alt="Thalyta Maia, arquiteta" class="portrait__img"
               data-parallax="0.05" loading="lazy">
           </picture>
         </figure>
@@ -218,9 +429,9 @@
             </div>
           </div>
           <div class="service__processos" data-placeholder>
-            <figure><img src="assets/pinterest/marias-kids-fachada.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/escritorio-orion.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/sala-jantar.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/escritorio-orion.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/sala-jantar.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
 
@@ -235,9 +446,9 @@
             </div>
           </div>
           <div class="service__processos" data-placeholder>
-            <figure><img src="assets/pinterest/cozinha-marmore.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/cozinha-office.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/lounge-verde.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/cozinha-marmore.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/cozinha-office.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/lounge-verde.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
 
@@ -252,9 +463,9 @@
             </div>
           </div>
           <div class="service__processos" data-placeholder>
-            <figure><img src="assets/pinterest/banheiro-terrazzo.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/lavabo-toucador.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/quarto-casal.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/banheiro-terrazzo.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/lavabo-toucador.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/quarto-casal.jpg" alt="Processo de obra" loading="lazy"></figure>
           </div>
         </article>
 
@@ -269,10 +480,10 @@
             </div>
           </div>
           <div class="service__processos" data-placeholder>
-            <figure><img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Processo de obra" loading="lazy">
+            <figure><img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Processo de obra" loading="lazy">
             </figure>
-            <figure><img src="assets/pinterest/bercario.jpg" alt="Processo de obra" loading="lazy"></figure>
-            <figure><img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="Processo de obra" loading="lazy">
+            <figure><img src="../assets/pinterest/bercario.jpg" alt="Processo de obra" loading="lazy"></figure>
+            <figure><img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="Processo de obra" loading="lazy">
             </figure>
           </div>
         </article>
@@ -309,7 +520,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/sala-jantar.jpg" alt="Iraci" loading="lazy">
+                <img src="../assets/pinterest/sala-jantar.jpg" alt="Iraci" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Iraci</h4>
@@ -324,13 +535,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/sala-jantar.jpg" alt="Iraci" loading="lazy">
+                  <img src="../assets/pinterest/sala-jantar.jpg" alt="Iraci" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/sala-jantar.jpg"
-                      alt="Iraci — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/cozinha-marmore.jpg"
-                      alt="Iraci — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/sala-jantar.jpg" alt="Iraci — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/cozinha-marmore.jpg" alt="Iraci — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -339,7 +548,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau" loading="lazy">
+                <img src="../assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Ladyslau</h4>
@@ -354,13 +563,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau" loading="lazy">
+                  <img src="../assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/cozinha-marmore.jpg"
-                      alt="Ladyslau — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Ladyslau — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/cozinha-marmore.jpg" alt="Ladyslau — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Ladyslau — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -369,7 +576,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/lounge-verde.jpg" alt="Adelaide" loading="lazy">
+                <img src="../assets/pinterest/lounge-verde.jpg" alt="Adelaide" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Adelaide</h4>
@@ -384,13 +591,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/lounge-verde.jpg" alt="Adelaide" loading="lazy">
+                  <img src="../assets/pinterest/lounge-verde.jpg" alt="Adelaide" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Adelaide — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-casal.jpg"
-                      alt="Adelaide — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Adelaide — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-casal.jpg" alt="Adelaide — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -406,7 +611,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia" loading="lazy">
+                <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Economize Farmácia</h4>
@@ -421,13 +626,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia" loading="lazy">
+                  <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/marias-kids-fachada.jpg"
-                      alt="Economize Farmácia — fachada" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="Economize Farmácia — interior" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Economize Farmácia — fachada" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="Economize Farmácia — interior" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -443,7 +646,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
+                <img src="../assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">A R</h4>
@@ -454,60 +657,35 @@
               <div class="project__text">
                 <div class="kicker kicker--terra">Interiores · Residencial</div>
                 <div class="rule-left"></div>
-                <p>Mais do que projetar ambientes, a proposta foi criar uma casa que traduzisse a essência de seus
-                  moradores. Cada espaço foi desenvolvido para estimular a convivência, promover conforto e revelar uma
-                  estética leve e sofisticada, onde cada detalhe contribui para uma arquitetura que permanece atual ao
-                  longo do tempo.</p>
+                <p>Mais do que projetar ambientes, a proposta foi criar uma casa que traduzisse a essência de seus moradores. Cada espaço foi desenvolvido para estimular a convivência, promover conforto e revelar uma estética leve e sofisticada, onde cada detalhe contribui para uma arquitetura que permanece atual ao longo do tempo.</p>
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
+                  <img src="../assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/01.jpg"
-                      alt="A R — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/02.jpg"
-                      alt="A R — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/03.jpg"
-                      alt="A R — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/04.jpg"
-                      alt="A R — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/05.jpg"
-                      alt="A R — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/06.jpg"
-                      alt="A R — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/07.jpg"
-                      alt="A R — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/08.jpg"
-                      alt="A R — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/09.jpg"
-                      alt="A R — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/10.jpg"
-                      alt="A R — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/11.jpg"
-                      alt="A R — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/12.jpg"
-                      alt="A R — ambiente 12" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/13.jpg"
-                      alt="A R — ambiente 13" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/14.jpg"
-                      alt="A R — ambiente 14" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/15.jpg"
-                      alt="A R — ambiente 15" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/16.jpg"
-                      alt="A R — ambiente 16" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/17.jpg"
-                      alt="A R — ambiente 17" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/18.jpg"
-                      alt="A R — ambiente 18" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/19.jpg"
-                      alt="A R — ambiente 19" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/20.jpg"
-                      alt="A R — ambiente 20" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/21.jpg"
-                      alt="A R — ambiente 21" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/22.jpg"
-                      alt="A R — ambiente 22" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/01.jpg" alt="A R — ambiente 01" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/02.jpg" alt="A R — ambiente 02" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/03.jpg" alt="A R — ambiente 03" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/04.jpg" alt="A R — ambiente 04" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/05.jpg" alt="A R — ambiente 05" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/06.jpg" alt="A R — ambiente 06" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/07.jpg" alt="A R — ambiente 07" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/08.jpg" alt="A R — ambiente 08" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/09.jpg" alt="A R — ambiente 09" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/10.jpg" alt="A R — ambiente 10" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/11.jpg" alt="A R — ambiente 11" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/12.jpg" alt="A R — ambiente 12" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/13.jpg" alt="A R — ambiente 13" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/14.jpg" alt="A R — ambiente 14" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/15.jpg" alt="A R — ambiente 15" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/16.jpg" alt="A R — ambiente 16" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/17.jpg" alt="A R — ambiente 17" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/18.jpg" alt="A R — ambiente 18" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/19.jpg" alt="A R — ambiente 19" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/20.jpg" alt="A R — ambiente 20" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/21.jpg" alt="A R — ambiente 21" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/a-r/22.jpg" alt="A R — ambiente 22" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -516,7 +694,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
+                <img src="../assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">F R</h4>
@@ -527,55 +705,32 @@
               <div class="project__text">
                 <div class="kicker kicker--terra">Interiores · Residencial</div>
                 <div class="rule-left"></div>
-                <p>Este projeto foi desenvolvido a partir da compreensão de que um lar deve ir além da estética: deve
-                  traduzir identidade, proporcionar bem-estar e criar memórias. A linguagem clássica contemporânea
-                  conduz toda a composição, revelando ambientes equilibrados, elegantes e acolhedores. A luz, a
-                  materialidade e os detalhes construtivos dialogam entre si para construir uma atmosfera refinada, onde
-                  cada espaço convida a desacelerar, contemplar e viver com autenticidade.</p>
+                <p>Este projeto foi desenvolvido a partir da compreensão de que um lar deve ir além da estética: deve traduzir identidade, proporcionar bem-estar e criar memórias. A linguagem clássica contemporânea conduz toda a composição, revelando ambientes equilibrados, elegantes e acolhedores. A luz, a materialidade e os detalhes construtivos dialogam entre si para construir uma atmosfera refinada, onde cada espaço convida a desacelerar, contemplar e viver com autenticidade.</p>
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
+                  <img src="../assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/01.jpg"
-                      alt="F R — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/02.jpg"
-                      alt="F R — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/03.jpg"
-                      alt="F R — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/04.jpg"
-                      alt="F R — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/05.jpg"
-                      alt="F R — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/06.jpg"
-                      alt="F R — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/07.jpg"
-                      alt="F R — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/08.jpg"
-                      alt="F R — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/09.jpg"
-                      alt="F R — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/10.jpg"
-                      alt="F R — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/11.jpg"
-                      alt="F R — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/12.jpg"
-                      alt="F R — ambiente 12" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/13.jpg"
-                      alt="F R — ambiente 13" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/14.jpg"
-                      alt="F R — ambiente 14" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/15.jpg"
-                      alt="F R — ambiente 15" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/16.jpg"
-                      alt="F R — ambiente 16" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/17.jpg"
-                      alt="F R — ambiente 17" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/18.jpg"
-                      alt="F R — ambiente 18" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/19.jpg"
-                      alt="F R — ambiente 19" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/01.jpg" alt="F R — ambiente 01" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/02.jpg" alt="F R — ambiente 02" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/03.jpg" alt="F R — ambiente 03" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/04.jpg" alt="F R — ambiente 04" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/05.jpg" alt="F R — ambiente 05" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/06.jpg" alt="F R — ambiente 06" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/07.jpg" alt="F R — ambiente 07" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/08.jpg" alt="F R — ambiente 08" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/09.jpg" alt="F R — ambiente 09" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/10.jpg" alt="F R — ambiente 10" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/11.jpg" alt="F R — ambiente 11" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/12.jpg" alt="F R — ambiente 12" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/13.jpg" alt="F R — ambiente 13" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/14.jpg" alt="F R — ambiente 14" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/15.jpg" alt="F R — ambiente 15" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/16.jpg" alt="F R — ambiente 16" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/17.jpg" alt="F R — ambiente 17" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/18.jpg" alt="F R — ambiente 18" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/f-r/19.jpg" alt="F R — ambiente 19" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -584,7 +739,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
+                <img src="../assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">U J</h4>
@@ -595,41 +750,25 @@
               <div class="project__text">
                 <div class="kicker kicker--terra">Interiores · Residencial</div>
                 <div class="rule-left"></div>
-                <p>A essência deste projeto está na criação de ambientes que respiram calma. A arquitetura explora a luz
-                  natural, a materialidade e a integração dos espaços para construir uma atmosfera leve e acolhedora,
-                  onde o conforto se manifesta de forma sutil. Tons naturais, texturas delicadas e elementos orgânicos
-                  se unem para compor uma residência que privilegia o bem-estar, a convivência e a conexão entre o
-                  interior e a paisagem, revelando uma elegância discreta e atemporal.</p>
+                <p>A essência deste projeto está na criação de ambientes que respiram calma. A arquitetura explora a luz natural, a materialidade e a integração dos espaços para construir uma atmosfera leve e acolhedora, onde o conforto se manifesta de forma sutil. Tons naturais, texturas delicadas e elementos orgânicos se unem para compor uma residência que privilegia o bem-estar, a convivência e a conexão entre o interior e a paisagem, revelando uma elegância discreta e atemporal.</p>
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
+                  <img src="../assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/01.jpg"
-                      alt="U J — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/02.jpg"
-                      alt="U J — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/03.jpg"
-                      alt="U J — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/04.jpg"
-                      alt="U J — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/05.jpg"
-                      alt="U J — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/06.jpg"
-                      alt="U J — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/07.jpg"
-                      alt="U J — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/08.jpg"
-                      alt="U J — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/09.jpg"
-                      alt="U J — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/10.jpg"
-                      alt="U J — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/11.jpg"
-                      alt="U J — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/12.jpg"
-                      alt="U J — ambiente 12" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/01.jpg" alt="U J — ambiente 01" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/02.jpg" alt="U J — ambiente 02" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/03.jpg" alt="U J — ambiente 03" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/04.jpg" alt="U J — ambiente 04" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/05.jpg" alt="U J — ambiente 05" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/06.jpg" alt="U J — ambiente 06" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/07.jpg" alt="U J — ambiente 07" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/08.jpg" alt="U J — ambiente 08" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/09.jpg" alt="U J — ambiente 09" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/10.jpg" alt="U J — ambiente 10" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/11.jpg" alt="U J — ambiente 11" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/projetos/u-j/12.jpg" alt="U J — ambiente 12" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -638,7 +777,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/cozinha-office.jpg" alt="Filipe F R" loading="lazy">
+                <img src="../assets/pinterest/cozinha-office.jpg" alt="Filipe F R" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Filipe F R</h4>
@@ -653,13 +792,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/cozinha-office.jpg" alt="Filipe F R" loading="lazy">
+                  <img src="../assets/pinterest/cozinha-office.jpg" alt="Filipe F R" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/cozinha-office.jpg"
-                      alt="Filipe F R — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/sala-jantar.jpg"
-                      alt="Filipe F R — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/cozinha-office.jpg" alt="Filipe F R — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/sala-jantar.jpg" alt="Filipe F R — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -668,7 +805,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/quarto-casal.jpg" alt="Uyara" loading="lazy">
+                <img src="../assets/pinterest/quarto-casal.jpg" alt="Uyara" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Uyara</h4>
@@ -683,13 +820,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/quarto-casal.jpg" alt="Uyara" loading="lazy">
+                  <img src="../assets/pinterest/quarto-casal.jpg" alt="Uyara" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-casal.jpg"
-                      alt="Uyara — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lavabo-toucador.jpg"
-                      alt="Uyara — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-casal.jpg" alt="Uyara — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lavabo-toucador.jpg" alt="Uyara — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -698,7 +833,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/sala-jantar.jpg" alt="Orivaldo" loading="lazy">
+                <img src="../assets/pinterest/sala-jantar.jpg" alt="Orivaldo" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Orivaldo</h4>
@@ -713,13 +848,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/sala-jantar.jpg" alt="Orivaldo" loading="lazy">
+                  <img src="../assets/pinterest/sala-jantar.jpg" alt="Orivaldo" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/sala-jantar.jpg"
-                      alt="Orivaldo — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/banheiro-terrazzo.jpg"
-                      alt="Orivaldo — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/sala-jantar.jpg" alt="Orivaldo — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/banheiro-terrazzo.jpg" alt="Orivaldo — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -728,7 +861,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana" loading="lazy">
+                <img src="../assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Rogério e Ana</h4>
@@ -743,13 +876,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana" loading="lazy">
+                  <img src="../assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lavabo-toucador.jpg"
-                      alt="Rogério e Ana — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/cozinha-marmore.jpg"
-                      alt="Rogério e Ana — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lavabo-toucador.jpg" alt="Rogério e Ana — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/cozinha-marmore.jpg" alt="Rogério e Ana — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -765,7 +896,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila" loading="lazy">
+                <img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Maria Clara | Kamila</h4>
@@ -780,13 +911,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila" loading="lazy">
+                  <img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-floral.jpg"
-                      alt="Maria Clara | Kamila — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/bercario.jpg"
-                      alt="Maria Clara | Kamila — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Maria Clara | Kamila — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/bercario.jpg" alt="Maria Clara | Kamila — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -795,7 +924,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/bercario.jpg" alt="Maria Antônia" loading="lazy">
+                <img src="../assets/pinterest/bercario.jpg" alt="Maria Antônia" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Maria Antônia</h4>
@@ -810,13 +939,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/bercario.jpg" alt="Maria Antônia" loading="lazy">
+                  <img src="../assets/pinterest/bercario.jpg" alt="Maria Antônia" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/bercario.jpg"
-                      alt="Maria Antônia — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-comoda.jpg"
-                      alt="Maria Antônia — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/bercario.jpg" alt="Maria Antônia — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="Maria Antônia — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -825,7 +952,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio" loading="lazy">
+                <img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">José Antônio</h4>
@@ -840,13 +967,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio" loading="lazy">
+                  <img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-comoda.jpg"
-                      alt="José Antônio — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-floral.jpg"
-                      alt="José Antônio — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="José Antônio — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="José Antônio — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -855,7 +980,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel" loading="lazy">
+                <img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Pedro Miguel</h4>
@@ -870,13 +995,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel" loading="lazy">
+                  <img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-floral.jpg"
-                      alt="Pedro Miguel — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-casal.jpg"
-                      alt="Pedro Miguel — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Pedro Miguel — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-casal.jpg" alt="Pedro Miguel — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -885,7 +1008,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/bercario.jpg" alt="Enzo" loading="lazy">
+                <img src="../assets/pinterest/bercario.jpg" alt="Enzo" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Enzo</h4>
@@ -900,13 +1023,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/bercario.jpg" alt="Enzo" loading="lazy">
+                  <img src="../assets/pinterest/bercario.jpg" alt="Enzo" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/bercario.jpg"
-                      alt="Enzo — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-comoda.jpg"
-                      alt="Enzo — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/bercario.jpg" alt="Enzo — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-comoda.jpg" alt="Enzo — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -922,7 +1043,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/escritorio-orion.jpg" alt="Luxshoes" loading="lazy">
+                <img src="../assets/pinterest/escritorio-orion.jpg" alt="Luxshoes" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Luxshoes</h4>
@@ -937,13 +1058,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/escritorio-orion.jpg" alt="Luxshoes" loading="lazy">
+                  <img src="../assets/pinterest/escritorio-orion.jpg" alt="Luxshoes" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="Luxshoes — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Luxshoes — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="Luxshoes — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Luxshoes — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -952,7 +1071,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/lounge-verde.jpg" alt="Machado Store" loading="lazy">
+                <img src="../assets/pinterest/lounge-verde.jpg" alt="Machado Store" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Machado Store</h4>
@@ -967,13 +1086,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/lounge-verde.jpg" alt="Machado Store" loading="lazy">
+                  <img src="../assets/pinterest/lounge-verde.jpg" alt="Machado Store" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Machado Store — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/marias-kids-fachada.jpg"
-                      alt="Machado Store — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Machado Store — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Machado Store — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -982,7 +1099,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato" loading="lazy">
+                <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Innamorato</h4>
@@ -997,13 +1114,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato" loading="lazy">
+                  <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/marias-kids-fachada.jpg"
-                      alt="Innamorato — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="Innamorato — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Innamorato — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="Innamorato — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -1012,7 +1127,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv" loading="lazy">
+                <img src="../assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Filipe Maia Broeto Adv</h4>
@@ -1027,13 +1142,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv" loading="lazy">
+                  <img src="../assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Filipe Maia Broeto Adv — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -1042,7 +1155,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/lounge-verde.jpg" alt="Valber Adv" loading="lazy">
+                <img src="../assets/pinterest/lounge-verde.jpg" alt="Valber Adv" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Valber Adv</h4>
@@ -1057,13 +1170,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/lounge-verde.jpg" alt="Valber Adv" loading="lazy">
+                  <img src="../assets/pinterest/lounge-verde.jpg" alt="Valber Adv" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="Valber Adv — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="Valber Adv — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="Valber Adv — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="Valber Adv — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -1072,7 +1183,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids" loading="lazy">
+                <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">Marias Kids</h4>
@@ -1087,13 +1198,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids" loading="lazy">
+                  <img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/marias-kids-fachada.jpg"
-                      alt="Marias Kids — fachada" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/quarto-infantil-floral.jpg"
-                      alt="Marias Kids — interior" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/marias-kids-fachada.jpg" alt="Marias Kids — fachada" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/quarto-infantil-floral.jpg" alt="Marias Kids — interior" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -1102,7 +1211,7 @@
           <details class="project" data-reveal="up" data-placeholder>
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/pinterest/escritorio-orion.jpg" alt="NC Store" loading="lazy">
+                <img src="../assets/pinterest/escritorio-orion.jpg" alt="NC Store" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">NC Store</h4>
@@ -1117,13 +1226,11 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/pinterest/escritorio-orion.jpg" alt="NC Store" loading="lazy">
+                  <img src="../assets/pinterest/escritorio-orion.jpg" alt="NC Store" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/escritorio-orion.jpg"
-                      alt="NC Store — ambiente" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/pinterest/lounge-verde.jpg"
-                      alt="NC Store — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/escritorio-orion.jpg" alt="NC Store — ambiente" loading="lazy"></button>
+                  <button type="button" class="project__thumb"><img src="../assets/pinterest/lounge-verde.jpg" alt="NC Store — ambiente" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
               </div>
@@ -1178,7 +1285,7 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <img src="assets/images/logo-thalyta-escuro.png" alt="" aria-hidden="true" class="footer__emblem" width="778"
+    <img src="../assets/images/logo-thalyta-escuro.png" alt="" aria-hidden="true" class="footer__emblem" width="778"
       height="260">
     <!-- REUNIÃO: finalização = barra de navegação + chamada de contato -->
     <nav class="footer__nav" aria-label="Navegação do rodapé">
@@ -1241,7 +1348,76 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="../js/main.js?v=4"></script>
+  <script>
+    /* HERO estilo fullPage.js: uma rolada = uma seção, 800ms, trava durante a animação.
+       Solta o scroll da página quando passa da última (e recaptura ao voltar ao topo). */
+    (function () {
+      var hero = document.getElementById('hero');
+      var track = document.getElementById('heroBTrack');
+      if (!hero || !track) return;
+      var slides = track.querySelectorAll('.heroB__slide');
+      var DURACAO = 800, ultima = slides.length - 1, i = 0, travado = false;
+
+      function mostrar(n) {
+        n = Math.max(0, Math.min(ultima, n));
+        if (n === i) return false;
+        i = n;
+        track.style.transform = 'translate3d(0,' + (-i * 100) + '%,0)';
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        hero.classList.toggle('is-last', i === ultima);
+        travado = true;
+        window.setTimeout(function () { travado = false; }, DURACAO);
+        return true;
+      }
+
+      // só captura a roda enquanto o hero ocupa a tela (página no topo)
+      function noHero() { return window.scrollY < 4; }
+
+      hero.addEventListener('wheel', function (e) {
+        if (!noHero()) return;
+        var desce = e.deltaY > 0;
+        if (travado) { e.preventDefault(); return; }
+        if (desce && i === ultima) return;   // libera a página pra seguir pro site
+        if (!desce && i === 0) return;
+        e.preventDefault();
+        mostrar(i + (desce ? 1 : -1));
+      }, { passive: false });
+
+      var y0 = null;
+      hero.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+      hero.addEventListener('touchmove', function (e) {
+        if (y0 === null || travado || !noHero()) return;
+        var dy = y0 - e.touches[0].clientY;
+        if (Math.abs(dy) < 20) return;       // touchSensitivity do original
+        var desce = dy > 0;
+        if ((desce && i === ultima) || (!desce && i === 0)) return;
+        e.preventDefault();
+        mostrar(i + (desce ? 1 : -1));
+        y0 = null;
+      }, { passive: false });
+
+      document.addEventListener('keydown', function (e) {
+        if (!noHero() || travado) return;
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') { if (mostrar(i + 1)) e.preventDefault(); }
+        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { if (mostrar(i - 1)) e.preventDefault(); }
+      });
+
+      // botão de destaque da última tela do hero — desce direto pra seção "Essência"
+      var cta = document.getElementById('heroBCta');
+      var essencia = document.getElementById('essencia');
+      if (cta && essencia) {
+        cta.addEventListener('click', function (e) {
+          e.preventDefault();
+          var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          essencia.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        });
+      }
+
+      document.getElementById('heroBCue').addEventListener('click', function () { mostrar(i + 1); });
+      slides[0].classList.add('is-active');
+    })();
+  </script>
 </body>
 
 </html>

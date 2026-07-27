@@ -219,6 +219,36 @@ a {
   color: var(--cream);
 }
 
+.nav__variant-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .15);
+  border: 1px solid rgba(255, 255, 255, .3);
+  color: var(--cream);
+  text-decoration: none;
+  transition: all .3s var(--ease);
+  margin-left: 8px;
+}
+
+.nav--solid .nav__variant-tag {
+  background: rgba(74, 46, 33, .08);
+  border-color: rgba(74, 46, 33, .2);
+  color: var(--brand);
+}
+
+.nav__variant-tag:hover {
+  background: var(--brand);
+  color: var(--cream);
+  border-color: var(--brand);
+}
+
 /* nav sólida (aplicada via JS ao rolar) */
 .nav--solid {
   background: rgba(246, 241, 233, .93);
@@ -1005,7 +1035,7 @@ body.menu-open .burger-line:nth-child(3) {
   display: flex;
   flex-wrap: wrap;
   gap: clamp(22px, 3.2vw, 50px);
-  align-items: flex-start;
+  align-items: stretch;
   padding: clamp(20px, 2.6vw, 34px) 0 clamp(10px, 1.4vw, 18px);
 }
 
@@ -1098,6 +1128,9 @@ body.menu-open .burger-line:nth-child(3) {
 .project__text {
   flex: 1 1 280px;
   max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* o kicker padrão (12px) sumia ao lado da descrição do projeto */
