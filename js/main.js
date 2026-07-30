@@ -233,7 +233,7 @@
       var title = nameEl ? nameEl.textContent.trim() : '';
       var palco = media.querySelector('.project__palco');
       var thumbs = $$('.project__thumb', media);
-      var items = (palco ? thumbs : $$('.frame', media)).map(function (el) {
+      var items = thumbs.map(function (el) {
         var img = el.querySelector('img');
         return {
           el: el,
@@ -285,7 +285,7 @@
       render(true);
     }
 
-    // torna clicável: o palco (projetos com miniaturas) ou cada quadro (os demais)
+    // torna o palco clicável; as miniaturas trocam a foto em destaque
     galleries.forEach(function (g, gi) {
       if (g.palco) {
         var conta = g.media.querySelector('.project__conta');
@@ -309,18 +309,7 @@
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(gi, atual, g.palco); }
         });
         destacar(0);
-        return;
       }
-      g.items.forEach(function (it, ii) {
-        var f = it.el;
-        f.setAttribute('role', 'button');
-        f.setAttribute('tabindex', '0');
-        f.setAttribute('aria-label', 'Ampliar imagem — ' + g.title + ' (' + (ii + 1) + ' de ' + g.items.length + ')');
-        f.addEventListener('click', function () { open(gi, ii, f); });
-        f.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(gi, ii, f); }
-        });
-      });
     });
 
     btnClose.addEventListener('click', close);
@@ -386,6 +375,17 @@
     });
   }
 
+  /* ---------- antes / depois ----------
+     O CSS não lê o value de um range, então o JS só espelha em --p.
+     Arrasto, toque e teclado já vêm do próprio <input type="range">. */
+  function initAntesDepois() {
+    $$('.ad__range').forEach(function (r) {
+      function sync() { r.closest('.ad').style.setProperty('--p', r.value + '%'); }
+      r.addEventListener('input', sync);
+      sync();
+    });
+  }
+
   /* ---------- init ---------- */
   function init() {
     initIntro();
@@ -395,6 +395,7 @@
     initParallax();
     initHeroMouse();
     initGallery();
+    initAntesDepois();
     onScrollNav();
     onScrollMisc();
   }

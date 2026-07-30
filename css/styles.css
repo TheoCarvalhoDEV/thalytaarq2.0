@@ -219,36 +219,6 @@ a {
   color: var(--cream);
 }
 
-.nav__variant-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--ff-sans);
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 99px;
-  background: rgba(255, 255, 255, .15);
-  border: 1px solid rgba(255, 255, 255, .3);
-  color: var(--cream);
-  text-decoration: none;
-  transition: all .3s var(--ease);
-  margin-left: 8px;
-}
-
-.nav--solid .nav__variant-tag {
-  background: rgba(74, 46, 33, .08);
-  border-color: rgba(74, 46, 33, .2);
-  color: var(--brand);
-}
-
-.nav__variant-tag:hover {
-  background: var(--brand);
-  color: var(--cream);
-  border-color: var(--brand);
-}
-
 /* nav sólida (aplicada via JS ao rolar) */
 .nav--solid {
   background: rgba(246, 241, 233, .93);
@@ -1721,4 +1691,87 @@ body.lb-lock {
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
   image-rendering: -webkit-optimize-contrast;
+}
+
+
+/* =========================================================
+   ANTES / DEPOIS
+   Duas fotos sobrepostas + <input type="range">. O range nativo já traz
+   arrasto, toque e teclado (setas, Home, End) — o JS só copia o valor
+   para --p, que o CSS não consegue ler sozinho.
+   ========================================================= */
+.ad {
+  --p: 50%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin: 0 0 clamp(10px, 1.2vw, 16px);
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.ad img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ad__depois {
+  clip-path: inset(0 0 0 var(--p));
+}
+
+.ad__tag {
+  position: absolute;
+  bottom: 12px;
+  z-index: 1;
+  padding: 5px 12px;
+  background: rgba(36, 22, 16, .55);
+  color: var(--cream);
+  font-family: var(--ff-sans);
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.ad__tag--antes  { left: 12px; }
+.ad__tag--depois { right: 12px; }
+
+.ad__range {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: ew-resize;
+}
+
+.ad__range::-webkit-slider-runnable-track { background: transparent; }
+.ad__range::-moz-range-track { background: transparent; }
+
+/* a alça É a linha divisória: mais alta que a moldura e cortada pelo overflow */
+.ad__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 3px;
+  height: 100vh;
+  background: var(--cream);
+  box-shadow: 0 0 0 1px rgba(36, 22, 16, .4);
+  cursor: ew-resize;
+}
+
+.ad__range::-moz-range-thumb {
+  width: 3px;
+  height: 100vh;
+  border: 0;
+  border-radius: 0;
+  background: var(--cream);
+  box-shadow: 0 0 0 1px rgba(36, 22, 16, .4);
+  cursor: ew-resize;
 }

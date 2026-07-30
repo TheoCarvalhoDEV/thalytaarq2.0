@@ -9,7 +9,7 @@
   <script>document.documentElement.className += ' js';</script>
   <meta name="description"
     content="Thalyta Maia — Arquitetura e Interiores. Projetos residenciais e comerciais com sensibilidade, criando ambientes que acolhem e inspiram. Atendimento presencial e online para todo o Brasil.">
-  <link rel="canonical" href="https://theocarvalhodev.github.io/thalytaarqu/">
+  <link rel="canonical" href="https://theocarvalhodev.github.io/thalytaarq2.0/">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 
@@ -19,10 +19,10 @@
   <meta property="og:title" content="Thalyta Maia · Arquitetura e Interiores">
   <meta property="og:description"
     content="Projetos residenciais e comerciais com sensibilidade — ambientes que acolhem e inspiram. Atendimento presencial e online para todo o Brasil.">
-  <meta property="og:url" content="https://theocarvalhodev.github.io/thalytaarqu/">
-  <meta property="og:image" content="https://theocarvalhodev.github.io/thalytaarqu/assets/images/og-thalyta-maia.jpg">
+  <meta property="og:url" content="https://theocarvalhodev.github.io/thalytaarq2.0/">
+  <meta property="og:image" content="https://theocarvalhodev.github.io/thalytaarq2.0/assets/images/og-thalyta-maia.jpg">
   <meta property="og:image:secure_url"
-    content="https://theocarvalhodev.github.io/thalytaarqu/assets/images/og-thalyta-maia.jpg">
+    content="https://theocarvalhodev.github.io/thalytaarq2.0/assets/images/og-thalyta-maia.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
   <meta name="twitter:title" content="Thalyta Maia · Arquitetura e Interiores">
   <meta name="twitter:description"
     content="Projetos residenciais e comerciais com sensibilidade — ambientes que acolhem e inspiram.">
-  <meta name="twitter:image" content="https://theocarvalhodev.github.io/thalytaarqu/assets/images/og-thalyta-maia.jpg">
+  <meta name="twitter:image" content="https://theocarvalhodev.github.io/thalytaarq2.0/assets/images/og-thalyta-maia.jpg">
   <meta name="twitter:image:alt" content="Thalyta Maia — Arquitetura e Interiores">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,8 +44,8 @@
     rel="stylesheet">
 
   <!-- cache-busting: ao mudar CSS/JS, incremente o número de ?v= para forçar o navegador a baixar a versão nova -->
-  <link rel="stylesheet" href="css/styles.css?v=7">
-  <link rel="stylesheet" href="css/animations.css?v=7">
+  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="stylesheet" href="css/animations.css?v=10">
 </head>
 
 <body>
@@ -65,7 +65,6 @@
       <a href="#int-residencial" class="nav__link" data-navlink>Int + Residencial</a>
       <a href="#int-comercial" class="nav__link" data-navlink>Int + Comercial</a>
       <a href="#contato" class="nav__link nav__link--btn" data-navlink>Contato</a>
-      <a href="hero-bernardes/index.html" class="nav__variant-tag" title="Alternar para a versão Hero Bernardes">Hero Bernardes ↗</a>
     </div>
 
     <button class="nav__burger" id="burger" data-navlink aria-label="Abrir menu" aria-expanded="false"
@@ -90,7 +89,6 @@
       <a href="#int-residencial" data-drawerlink>Int + Residencial</a>
       <a href="#int-comercial" data-drawerlink>Int + Comercial</a>
       <a href="#contato" data-drawerlink>Contato</a>
-      <a href="hero-bernardes/index.html" style="margin-top:14px; font-size:13px; font-weight:600; color:var(--brand);">Ver Versão Hero Bernardes ↗</a>
     </nav>
     <div class="drawer__contact">(65) 99646-6782<br>arquitetathalytamaia@gmail.com</div>
   </aside>
@@ -205,7 +203,9 @@
 
       <!-- ⚠️ PLACEHOLDER — as 12 fotos das faixas .service__processos são de ambiente
            PRONTO (banco atual do site). SUBSTITUIR pelas fotos de OBRA EM ANDAMENTO que a
-           Thalyta vai enviar e apagar o data-placeholder de cada faixa (some a tracejada). -->
+           Thalyta vai enviar e apagar o data-placeholder de cada faixa.
+           OBS: aqui o data-placeholder é só marcador para busca — não muda nada visualmente.
+           A tracejada só existe em #projetos (.projetos:has([data-placeholder])). -->
       <div class="servicos__grid" data-stagger>
         <article class="service" data-reveal="up">
           <div class="service__text">
@@ -443,7 +443,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
+                <img src="assets/projetos/a-r/01.webp" alt="A R" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">A R</h4>
@@ -460,53 +460,66 @@
                   longo do tempo.</p>
               </div>
               <div class="project__media project__media--destaque">
+                <!-- ANTES / DEPOIS — pronto para usar, falta a foto "antes".
+                     Salve o registro do espaço original como assets/projetos/<projeto>/antes-01.jpg,
+                     rode `python tools/webp.py` e descomente o bloco abaixo. O lightbox ignora
+                     esta figure (não é .project__palco nem .project__thumb).
+                <figure class="ad">
+                  <img src="assets/projetos/a-r/antes-01.webp" alt="A R — sala antes da reforma">
+                  <img class="ad__depois" src="assets/projetos/a-r/01.webp" alt="A R — sala depois">
+                  <span class="ad__tag ad__tag--antes">Antes</span>
+                  <span class="ad__tag ad__tag--depois">Depois</span>
+                  <input class="ad__range" type="range" min="0" max="100" value="50"
+                    aria-label="Comparar antes e depois — A R, sala">
+                </figure>
+                -->
                 <figure class="project__palco">
-                  <img src="assets/projetos/a-r/01.jpg" alt="A R" loading="lazy">
+                  <img src="assets/projetos/a-r/01.webp" alt="A R" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/01.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/01.webp"
                       alt="A R — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/02.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/02.webp"
                       alt="A R — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/03.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/03.webp"
                       alt="A R — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/04.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/04.webp"
                       alt="A R — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/05.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/05.webp"
                       alt="A R — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/06.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/06.webp"
                       alt="A R — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/07.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/07.webp"
                       alt="A R — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/08.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/08.webp"
                       alt="A R — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/09.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/09.webp"
                       alt="A R — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/10.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/10.webp"
                       alt="A R — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/11.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/11.webp"
                       alt="A R — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/12.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/12.webp"
                       alt="A R — ambiente 12" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/13.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/13.webp"
                       alt="A R — ambiente 13" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/14.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/14.webp"
                       alt="A R — ambiente 14" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/15.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/15.webp"
                       alt="A R — ambiente 15" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/16.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/16.webp"
                       alt="A R — ambiente 16" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/17.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/17.webp"
                       alt="A R — ambiente 17" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/18.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/18.webp"
                       alt="A R — ambiente 18" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/19.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/19.webp"
                       alt="A R — ambiente 19" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/20.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/20.webp"
                       alt="A R — ambiente 20" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/21.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/21.webp"
                       alt="A R — ambiente 21" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/22.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/a-r/22.webp"
                       alt="A R — ambiente 22" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
@@ -516,7 +529,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
+                <img src="assets/projetos/f-r/01.webp" alt="F R" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">F R</h4>
@@ -535,46 +548,46 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/projetos/f-r/01.jpg" alt="F R" loading="lazy">
+                  <img src="assets/projetos/f-r/01.webp" alt="F R" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/01.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/01.webp"
                       alt="F R — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/02.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/02.webp"
                       alt="F R — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/03.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/03.webp"
                       alt="F R — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/04.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/04.webp"
                       alt="F R — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/05.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/05.webp"
                       alt="F R — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/06.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/06.webp"
                       alt="F R — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/07.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/07.webp"
                       alt="F R — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/08.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/08.webp"
                       alt="F R — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/09.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/09.webp"
                       alt="F R — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/10.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/10.webp"
                       alt="F R — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/11.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/11.webp"
                       alt="F R — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/12.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/12.webp"
                       alt="F R — ambiente 12" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/13.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/13.webp"
                       alt="F R — ambiente 13" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/14.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/14.webp"
                       alt="F R — ambiente 14" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/15.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/15.webp"
                       alt="F R — ambiente 15" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/16.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/16.webp"
                       alt="F R — ambiente 16" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/17.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/17.webp"
                       alt="F R — ambiente 17" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/18.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/18.webp"
                       alt="F R — ambiente 18" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/19.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/f-r/19.webp"
                       alt="F R — ambiente 19" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
@@ -584,7 +597,7 @@
           <details class="project" data-reveal="up">
             <summary class="project__cover">
               <figure class="project__capa">
-                <img src="assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
+                <img src="assets/projetos/u-j/01.webp" alt="U J" loading="lazy">
               </figure>
               <div class="project__label">
                 <h4 class="project__name">U J</h4>
@@ -603,32 +616,32 @@
               </div>
               <div class="project__media project__media--destaque">
                 <figure class="project__palco">
-                  <img src="assets/projetos/u-j/01.jpg" alt="U J" loading="lazy">
+                  <img src="assets/projetos/u-j/01.webp" alt="U J" loading="lazy">
                 </figure>
                 <div class="project__thumbs">
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/01.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/01.webp"
                       alt="U J — ambiente 01" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/02.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/02.webp"
                       alt="U J — ambiente 02" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/03.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/03.webp"
                       alt="U J — ambiente 03" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/04.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/04.webp"
                       alt="U J — ambiente 04" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/05.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/05.webp"
                       alt="U J — ambiente 05" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/06.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/06.webp"
                       alt="U J — ambiente 06" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/07.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/07.webp"
                       alt="U J — ambiente 07" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/08.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/08.webp"
                       alt="U J — ambiente 08" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/09.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/09.webp"
                       alt="U J — ambiente 09" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/10.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/10.webp"
                       alt="U J — ambiente 10" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/11.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/11.webp"
                       alt="U J — ambiente 11" loading="lazy"></button>
-                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/12.jpg"
+                  <button type="button" class="project__thumb"><img src="assets/projetos/u-j/12.webp"
                       alt="U J — ambiente 12" loading="lazy"></button>
                 </div>
                 <p class="project__conta"></p>
@@ -1241,7 +1254,7 @@
     </button>
   </div>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 
 </html>
