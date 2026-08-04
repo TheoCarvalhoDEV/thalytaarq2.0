@@ -768,28 +768,6 @@ body.menu-open .burger-line:nth-child(3) {
   letter-spacing: .07em;
 }
 
-/* aviso de prévia — some SOZINHO quando o último data-placeholder sair do HTML.
-   Substituiu as bordas tracejadas, que poluíam as capas. */
-.projetos__aviso {
-  display: none;
-}
-
-.projetos:has([data-placeholder]) .projetos__aviso {
-  display: block;
-  max-width: 640px;
-  margin: 0 auto clamp(40px, 5.5vw, 64px);
-  padding: 12px 22px;
-  border: 1px solid rgba(160, 106, 73, .35);
-  font-family: var(--ff-sans);
-  font-weight: 300;
-  font-style: italic;
-  font-size: 13.5px;
-  line-height: 1.6;
-  letter-spacing: .03em;
-  text-align: center;
-  color: var(--muted);
-}
-
 /* ---------- grupos ---------- */
 .projetos__grupo {
   margin-top: clamp(48px, 7vh, 84px);
