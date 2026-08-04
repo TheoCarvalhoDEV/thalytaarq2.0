@@ -45,7 +45,7 @@
     rel="stylesheet">
 
   <!-- cache-busting: ao mudar CSS/JS, incremente o número de ?v= para forçar o navegador a baixar a versão nova -->
-  <link rel="stylesheet" href="../css/styles.css?v=12">
+  <link rel="stylesheet" href="../css/styles.css?v=13">
   <link rel="stylesheet" href="../css/animations.css?v=10">
 
   <style>
@@ -55,6 +55,17 @@
       height: 100vh;
       overflow: hidden;
       background: var(--ink);
+      /* No touch, o guard de sensibilidade (< 20px) do controlador retorna sem
+         preventDefault. O browser lê isso como "pode rolar", entra em modo scroll,
+         e a partir daí todo touchmove vira nao-cancelavel — o preventDefault seguinte
+         é ignorado e a pagina foge do hero. touch-action impede o browser de comecar
+         o scroll, entao o gesto continua cancelavel. */
+      touch-action: none;
+    }
+
+    /* na ultima tela o controlador entrega o scroll pra pagina de proposito */
+    .heroB.is-last {
+      touch-action: pan-y;
     }
 
     .heroB__viewport {
@@ -504,9 +515,6 @@
         <h2 class="section-title section-title--dark">Conheça alguns dos nossos projetos</h2>
         <div class="rule-center"></div>
       </header>
-
-      <p class="projetos__aviso">Prévia — as capas, as fotos internas e as descrições ainda são provisórias,
-        aguardando o material da Thalyta.</p>
 
       <!-- ============================================================
            COMO TROCAR UM PLACEHOLDER POR UM PROJETO REAL:
