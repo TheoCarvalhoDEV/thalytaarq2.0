@@ -46,6 +46,232 @@
   <!-- cache-busting: ao mudar CSS/JS, incremente o número de ?v= para forçar o navegador a baixar a versão nova -->
   <link rel="stylesheet" href="css/styles.css?v=13">
   <link rel="stylesheet" href="css/animations.css?v=10">
+
+  <style>
+    /* ---- VARIANTE DE HERO (estilo bernardesarq) ---- */
+    .heroB {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--ink);
+      /* No touch, o guard de sensibilidade (< 20px) do controlador retorna sem
+         preventDefault. O browser lê isso como "pode rolar", entra em modo scroll,
+         e a partir daí todo touchmove vira nao-cancelavel — o preventDefault seguinte
+         é ignorado e a pagina foge do hero. touch-action impede o browser de comecar
+         o scroll, entao o gesto continua cancelavel. */
+      touch-action: none;
+    }
+
+    /* na ultima tela o controlador entrega o scroll pra pagina de proposito */
+    .heroB.is-last {
+      touch-action: pan-y;
+    }
+
+    .heroB__viewport {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* a pilha inteira desliza — é isso que o fullPage.js faz com translate3d */
+    .heroB__track {
+      height: 100%;
+      transition: transform 800ms ease;
+      will-change: transform;
+    }
+
+    .heroB__slide {
+      position: relative;
+      height: 100vh;
+      background: var(--ink) center center / cover no-repeat;
+    }
+
+    .heroB__slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(36, 22, 16, .40) 0%, rgba(36, 22, 16, .04) 34%, rgba(36, 22, 16, .55) 100%);
+      pointer-events: none;
+    }
+
+    .heroB__link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .heroB__label {
+      position: absolute;
+      left: clamp(20px, 5vw, 60px);
+      bottom: clamp(38px, 6vw, 70px);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--cream);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .7s var(--ease) .25s, transform .7s var(--ease) .25s;
+    }
+
+    .heroB__slide.is-active .heroB__label {
+      opacity: 1;
+      transform: none;
+    }
+
+    .heroB__cat {
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .82;
+    }
+
+    .heroB__nome {
+      font-family: var(--ff-serif);
+      font-size: clamp(30px, 4.4vw, 58px);
+      line-height: 1.05;
+    }
+
+    .heroB__cta {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 15px 32px;
+      font-family: var(--ff-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid var(--cream);
+      border-radius: 999px;
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 8px 26px rgba(20, 12, 8, .28);
+      transform: translate(-50%, -50%) translateY(12px);
+      transition: opacity .7s var(--ease) .25s, transform .7s var(--ease) .25s, background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
+    }
+
+    .heroB__slide.is-active .heroB__cta {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+      animation: heroB-cta-pulse 2.6s ease-in-out infinite 1s;
+    }
+
+    .heroB__cta svg {
+      transition: transform .35s var(--ease);
+    }
+
+    .heroB__slide.is-active .heroB__cta:hover,
+    .heroB__slide.is-active .heroB__cta:focus-visible {
+      background: transparent;
+      color: var(--cream);
+      box-shadow: 0 14px 34px rgba(20, 12, 8, .38);
+      animation-play-state: paused;
+    }
+
+    .heroB__cta:hover svg,
+    .heroB__cta:focus-visible svg {
+      transform: translateX(4px);
+    }
+
+    @keyframes heroB-cta-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 26px rgba(20, 12, 8, .28), 0 0 0 0 rgba(246, 241, 233, .35);
+      }
+
+      50% {
+        box-shadow: 0 8px 26px rgba(20, 12, 8, .28), 0 0 0 9px rgba(246, 241, 233, 0);
+      }
+    }
+
+    .heroB__cue,
+    .heroB__todos {
+      position: absolute;
+      z-index: 4;
+      color: var(--cream);
+      text-decoration: none;
+      transition: opacity .5s var(--ease), transform .5s var(--ease);
+    }
+
+    .heroB__cue {
+      left: 50%;
+      bottom: 26px;
+      margin-left: -9px;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      animation: heroB-bounce 2.4s infinite;
+    }
+
+    /* na última tela a seta some e o "Todos os projetos" sobe — igual ao original */
+    .heroB.is-last .heroB__cue {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heroB__todos {
+      right: clamp(20px, 5vw, 60px);
+      bottom: clamp(38px, 6vw, 70px);
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(246, 241, 233, .5);
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+    }
+
+    .heroB.is-last .heroB__todos {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .heroB__todos:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    @keyframes heroB-bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(9px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .heroB__track,
+      .heroB__label,
+      .heroB__cta,
+      .heroB__cue,
+      .heroB__todos {
+        transition: none;
+        animation: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -94,67 +320,63 @@
   </aside>
 
   <!-- ================= HERO ================= -->
-  <section id="hero" class="hero">
-    <div class="hero__slides" id="heroSlides">
-      <div class="hero__slide is-active" data-pan="1">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-cozinha-768.webp 768w, assets/images/webp/hero-cozinha-1280.webp 1280w, assets/images/webp/hero-cozinha-1440.webp 1440w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-cozinha.jpg" alt="" fetchpriority="high"
-            decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="2">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-lounge-768.webp 768w, assets/images/webp/hero-lounge-1280.webp 1280w, assets/images/webp/hero-lounge-1920.webp 1920w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-lounge.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="3">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-lavabo-768.webp 768w, assets/images/webp/hero-lavabo-1280.webp 1280w, assets/images/webp/hero-lavabo-1440.webp 1440w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-lavabo.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
-      </div>
-      <div class="hero__slide" data-pan="4">
-        <picture>
-          <source type="image/webp"
-            srcset="assets/images/webp/hero-quarto-768.webp 768w, assets/images/webp/hero-quarto-1280.webp 1280w"
-            sizes="100vw">
-          <img class="hero__slide-img" src="assets/images/hero-quarto.jpg" alt="" loading="lazy" decoding="async">
-        </picture>
+  <!-- ================= HERO (variante bernardesarq) =================
+       Igual ao fullPage.js do site de referência: a pilha inteira de seções translada
+       100vh por vez, 800ms com easing "ease", e uma rolada da roda = exatamente uma
+       seção. Sem jQuery e sem as 90 KB do plugin — o controlador está no fim do body. -->
+  <section id="hero" class="heroB">
+    <div class="heroB__viewport">
+      <div class="heroB__track" id="heroBTrack">
+        <section class="heroB__slide" style="background-image:url('assets/projetos/a-r/01.webp')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver A R"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">A R</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('assets/images/hero-lounge.jpg')">
+          <a class="heroB__link" href="#arq-residencial" aria-label="Ver Adelaide"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Arquitetônico · Residencial</span>
+            <span class="heroB__nome">Adelaide</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('assets/projetos/f-r/01.webp')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver F R"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">F R</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('assets/projetos/u-j/01.webp')">
+          <a class="heroB__link" href="#int-residencial" aria-label="Ver U J"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Residencial</span>
+            <span class="heroB__nome">U J</span>
+          </div>
+        </section>
+        <section class="heroB__slide" style="background-image:url('assets/images/hero-lavabo.jpg')">
+          <a class="heroB__link" href="#int-comercial" aria-label="Ver Marias Kids"></a>
+          <div class="heroB__label">
+            <span class="heroB__cat">Interiores · Comercial</span>
+            <span class="heroB__nome">Marias Kids</span>
+          </div>
+          <a class="heroB__cta" href="#essencia" id="heroBCta">Conheça mais
+            <svg width="14" height="10" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5"
+              aria-hidden="true">
+              <path d="M1 7h17M12 1l6 6-6 6" />
+            </svg>
+          </a>
+        </section>
       </div>
     </div>
-    <div class="hero__overlay"></div>
-
-    <div class="hero__content" id="heroContent">
-      <!-- selo removido na reunião: capa mais limpa, a logo continua na nav -->
-      <h1 class="hero__title" data-hero data-letters>THALYTA MAIA</h1>
-      <div class="hero__subtitle" data-hero>
-        <span class="hero__rule"></span>
-        <span class="hero__sub-text">Arquitetura e Interiores</span>
-        <span class="hero__rule"></span>
-      </div>
-    </div>
-
-    <a href="#essencia" class="hero__cue" aria-label="Rolar para baixo">
-      <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.3"
+    <button type="button" class="heroB__cue" id="heroBCue" aria-label="Próximo projeto">
+      <svg width="18" height="28" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.3"
         aria-hidden="true">
         <path d="M10 1v22M4 17l6 6 6-6" />
       </svg>
-    </a>
-
-    <div class="hero__dots" id="heroDots" role="tablist" aria-label="Slides">
-      <button class="hero__dot is-active" data-slide="0" aria-label="Slide 1"></button>
-      <button class="hero__dot" data-slide="1" aria-label="Slide 2"></button>
-      <button class="hero__dot" data-slide="2" aria-label="Slide 3"></button>
-      <button class="hero__dot" data-slide="3" aria-label="Slide 4"></button>
-    </div>
+    </button>
+    <a href="#projetos" class="heroB__todos">Todos os projetos</a>
   </section>
 
   <!-- ================= ESSÊNCIA ================= -->
@@ -1252,6 +1474,75 @@
   </div>
 
   <script src="js/main.js?v=7"></script>
+  <script>
+    /* HERO estilo fullPage.js: uma rolada = uma seção, 800ms, trava durante a animação.
+       Solta o scroll da página quando passa da última (e recaptura ao voltar ao topo). */
+    (function () {
+      var hero = document.getElementById('hero');
+      var track = document.getElementById('heroBTrack');
+      if (!hero || !track) return;
+      var slides = track.querySelectorAll('.heroB__slide');
+      var DURACAO = 800, ultima = slides.length - 1, i = 0, travado = false;
+
+      function mostrar(n) {
+        n = Math.max(0, Math.min(ultima, n));
+        if (n === i) return false;
+        i = n;
+        track.style.transform = 'translate3d(0,' + (-i * 100) + '%,0)';
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        hero.classList.toggle('is-last', i === ultima);
+        travado = true;
+        window.setTimeout(function () { travado = false; }, DURACAO);
+        return true;
+      }
+
+      // só captura a roda enquanto o hero ocupa a tela (página no topo)
+      function noHero() { return window.scrollY < 4; }
+
+      hero.addEventListener('wheel', function (e) {
+        if (!noHero()) return;
+        var desce = e.deltaY > 0;
+        if (travado) { e.preventDefault(); return; }
+        if (desce && i === ultima) return;   // libera a página pra seguir pro site
+        if (!desce && i === 0) return;
+        e.preventDefault();
+        mostrar(i + (desce ? 1 : -1));
+      }, { passive: false });
+
+      var y0 = null;
+      hero.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+      hero.addEventListener('touchmove', function (e) {
+        if (y0 === null || travado || !noHero()) return;
+        var dy = y0 - e.touches[0].clientY;
+        if (Math.abs(dy) < 20) return;       // touchSensitivity do original
+        var desce = dy > 0;
+        if ((desce && i === ultima) || (!desce && i === 0)) return;
+        e.preventDefault();
+        mostrar(i + (desce ? 1 : -1));
+        y0 = null;
+      }, { passive: false });
+
+      document.addEventListener('keydown', function (e) {
+        if (!noHero() || travado) return;
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') { if (mostrar(i + 1)) e.preventDefault(); }
+        else if (e.key === 'ArrowUp' || e.key === 'PageUp') { if (mostrar(i - 1)) e.preventDefault(); }
+      });
+
+      // botão de destaque da última tela do hero — desce direto pra seção "Essência"
+      var cta = document.getElementById('heroBCta');
+      var essencia = document.getElementById('essencia');
+      if (cta && essencia) {
+        cta.addEventListener('click', function (e) {
+          e.preventDefault();
+          var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          essencia.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        });
+      }
+
+      document.getElementById('heroBCue').addEventListener('click', function () { mostrar(i + 1); });
+      slides[0].classList.add('is-active');
+    })();
+  </script>
 </body>
 
 </html>
